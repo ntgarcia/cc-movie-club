@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Azeret_Mono as Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
+import "./globals.css"
 
 const geistSans = Geist({
   subsets: ['latin'],
