@@ -116,7 +116,7 @@ export default function Page() {
                         </div>
                         
                         <div className="flex items-center gap-4">
-                          <div className="flex -space-x-2 shrink-0">
+                          <div className="hidden sm:flex -space-x-2 shrink-0">
                             {movie.contributors.map((contributor) => (
                               <Avatar key={contributor} className="h-6 w-6 border-2 border-background">
                                 <AvatarImage 
