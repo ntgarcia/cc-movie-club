@@ -9,47 +9,23 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 
 const people = [
-  { name: "Alice Johnson", avatar: "/placeholder.svg?height=32&width=32" },
-  { name: "Bob Smith", avatar: "/placeholder.svg?height=32&width=32" },
-  { name: "Charlie Brown", avatar: "/placeholder.svg?height=32&width=32" },
-  { name: "Diana Ross", avatar: "/placeholder.svg?height=32&width=32" },
+  { name: "Nathan Garcia", avatar: "/nt.jpg" },
+  { name: "Johann Ebrole", avatar: "/jn.jpg" },
+  { name: "Nigel Tomas", avatar: "/ng.jpg" },
+  { name: "Tisha Halim", avatar: "/th.jpg" },
 ]
 
 const movies = [
   { 
-    title: "Dune", 
-    date: "December 2023",
-    description: "Epic sci-fi adaptation of Frank Herbert's novel",
-    image: "/placeholder.svg?height=120&width=80",
-    picker: "Alice Johnson",
-    contributors: ["Alice Johnson", "Bob Smith"],
+    title: "Nosferatu", 
+    date: "December 2024",
+    description: "Freaky retelling of that one Spongebob episode",
+    image: "/nosferatu.jpg",
+    picker: "Nathan",
+    contributors: ["Nathan Garcia", "Johann Ebrole", "Nigel Tomas", "Tisha Halim"],
     comments: [
-      { author: "Bob Smith", text: "The cinematography was breathtaking!" },
-      { author: "Alice Johnson", text: "The score by Hans Zimmer was incredible." },
-    ]
-  },
-  { 
-    title: "Oppenheimer", 
-    date: "November 2023",
-    description: "Biographical thriller about J. Robert Oppenheimer",
-    image: "/placeholder.svg?height=120&width=80",
-    picker: "Charlie Brown",
-    contributors: ["Charlie Brown"],
-    comments: [
-      { author: "Charlie Brown", text: "Cillian Murphy's performance was outstanding." },
-      { author: "Diana Ross", text: "The tension throughout was palpable." },
-    ]
-  },
-  { 
-    title: "Barbie", 
-    date: "October 2023",
-    description: "Adventure comedy based on the iconic doll",
-    image: "/placeholder.svg?height=120&width=80",
-    picker: "Diana Ross",
-    contributors: ["Diana Ross", "Alice Johnson"],
-    comments: [
-      { author: "Diana Ross", text: "Such a fun and thoughtful movie!" },
-      { author: "Alice Johnson", text: "Loved the social commentary." },
+      { author: "Johann Ebrole", text: "The cinematography was breathtaking." },
+      { author: "Nigel Tomas", text: "He got a bluetooth d***!" },
     ]
   },
 ]
@@ -70,7 +46,7 @@ export default function Page() {
       <div className="mx-auto max-w-2xl px-4 py-12">
         <header className="mb-8 flex flex-col items-left">
           <Avatar className="h-8 w-8 mb-4">
-            <AvatarImage src="/placeholder.svg?height=120&width=80"/>
+            <AvatarImage src="/cc.png"/>
             <AvatarFallback>CC</AvatarFallback>
           </Avatar>
           <h1 className="mb-4 text-base font-bold">Creamcheese Movie Club</h1>
@@ -82,7 +58,7 @@ export default function Page() {
         <section className="mb-16 space-y-2">
           <h2 className="text-sm font-medium tracking-wider text-muted-foreground">About</h2>
           <p className="leading-relaxed">
-            We love Movies!
+            Our personal movie club, showcasing the movies we watch each months and our thoughts!
           </p>
         </section>
 
