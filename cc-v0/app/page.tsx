@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
-import { Button } from "@/Components/ui/button"
+import { Button } from "@/components/ui/button"
 
 const people = [
   { name: "Alice Johnson", avatar: "/placeholder.svg?height=32&width=32" },
