@@ -3,9 +3,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Film, ChevronDown, ChevronUp } from "lucide-react"
-import Image from "next/image"
-import { useState } from "react"
+import { Film, ChevronDown, ChevronUp } from 'lucide-react'
+import Image from 'next/image'
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 
 const people = [
@@ -66,7 +66,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50">
+    <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-2xl px-4 py-12">
         <header className="mb-8 flex flex-col items-left">
           <Avatar className="h-8 w-8 mb-4">
@@ -80,20 +80,20 @@ export default function Page() {
         </header>
 
         <section className="mb-16 space-y-2">
-          <h2 className="text-sm font-medium tracking-wider text-neutral-500 dark:text-neutral-400">About</h2>
+          <h2 className="text-sm font-medium tracking-wider text-muted-foreground">About</h2>
           <p className="leading-relaxed">
             It all started with a shared love for movies and endless debates about plot twists. Now, we meet monthly to watch and discuss films, taking turns to pick the next screening. Some choices are profound, others are delightfully questionable – but that's what makes our movie club special.
           </p>
         </section>
 
         <section className="mb-16 space-y-4">
-          <h2 className="text-sm font-medium tracking-wider text-neutral-500 dark:text-neutral-400">People</h2>
+          <h2 className="text-sm font-medium tracking-wider text-muted-foreground">People</h2>
           <div className="flex flex-wrap gap-4">
             {people.map((person) => (
               <div key={person.name} className="flex items-center space-x-2">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={person.avatar} alt={person.name} />
-                  <AvatarFallback>{person.name.split("'").map(n => n[0]).join("''")}</AvatarFallback>
+                  <AvatarFallback>{person.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
                 <span className="text-sm">{person.name}</span>
               </div>
@@ -102,18 +102,18 @@ export default function Page() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-sm font-medium tracking-wider text-neutral-500 dark:text-neutral-400">Movies</h2>
+          <h2 className="text-sm font-medium tracking-wider text-muted-foreground">Movies</h2>
           <div className="relative space-y-4 pl-4">
-            <div className="absolute left-0 top-0 h-full w-px bg-neutral-200 dark:bg-neutral-800" />
+            <div className="absolute left-0 top-0 h-full w-px bg-border" />
             
             {movies.map((movie) => {
               const isExpanded = expandedMovies.includes(movie.title)
               
               return (
                 <div key={movie.title} className="group relative">
-                  <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-white bg-neutral-200 group-hover:bg-neutral-900 dark:border-neutral-950 dark:bg-neutral-800 dark:group-hover:bg-neutral-50" />
+                  <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
                   
-                  <div className="rounded-lg border border-neutral-200 transition-colors hover:bg-neutral-100/50 dark:border-neutral-800 dark:hover:bg-neutral-800/50">
+                  <div className="rounded-lg border transition-colors hover:bg-muted/50">
                     <div className="p-4">
                       <div className="flex items-start gap-4">
                         <div className="shrink-0">
@@ -130,22 +130,22 @@ export default function Page() {
                           <div className="flex items-center gap-2">
                             <h3 className="font-medium leading-none">{movie.title}</h3>
                             <Badge variant="secondary" className="text-xs">
-                              Picked by {movie.picker.split("'")[0]}
+                              Picked by {movie.picker.split(' ')[0]}
                             </Badge>
                           </div>
-                          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{movie.date}</p>
-                          <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">{movie.description}</p>
+                          <p className="mt-1 text-sm text-muted-foreground">{movie.date}</p>
+                          <p className="mt-2 text-sm text-muted-foreground">{movie.description}</p>
                         </div>
                         
                         <div className="flex items-center gap-4">
                           <div className="flex -space-x-2 shrink-0">
                             {movie.contributors.map((contributor) => (
-                              <Avatar key={contributor} className="h-6 w-6 border-2 border-white dark:border-neutral-950">
+                              <Avatar key={contributor} className="h-6 w-6 border-2 border-background">
                                 <AvatarImage 
                                   src={people.find(p => p.name === contributor)?.avatar} 
                                   alt={contributor} 
                                 />
-                                <AvatarFallback>{contributor.split("'").map(n => n[0]).join("''")}</AvatarFallback>
+                                <AvatarFallback>{contributor.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                               </Avatar>
                             ))}
                           </div>
@@ -166,7 +166,7 @@ export default function Page() {
                     </div>
                     
                     {isExpanded && (
-                      <div className="border-t bg-neutral-100/50 px-4 py-3 dark:bg-neutral-800/50">
+                      <div className="border-t bg-muted/50 px-4 py-3">
                         <h4 className="mb-2 text-sm font-medium">Comments</h4>
                         <div className="space-y-3">
                           {movie.comments.map((comment, index) => (
@@ -176,11 +176,11 @@ export default function Page() {
                                   src={people.find(p => p.name === comment.author)?.avatar} 
                                   alt={comment.author} 
                                 />
-                                <AvatarFallback>{comment.author.split("'").map(n => n[0]).join("''")}</AvatarFallback>
+                                <AvatarFallback>{comment.author.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                               </Avatar>
                               <div className="flex-1">
-                                <p className="text-sm font-medium">{comment.author.split("'")[0]}</p>
-                                <p className="text-sm text-neutral-500 dark:text-neutral-400">{comment.text}</p>
+                                <p className="text-sm font-medium">{comment.author.split(' ')[0]}</p>
+                                <p className="text-sm text-muted-foreground">{comment.text}</p>
                               </div>
                             </div>
                           ))}
