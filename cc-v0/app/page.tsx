@@ -13,18 +13,20 @@ const people = [
   { name: "Johann Ebrole", avatar: "/jn.jpg" },
   { name: "Nigel Tomas", avatar: "/ng.jpg" },
   { name: "Tisha Halim", avatar: "/th.jpg" },
+  { name: "Gabe Apolinar", avatar: "/ga.jpg" },
 ]
 
 const movies = [
   { 
     title: "Nosferatu", 
     date: "December 2024",
-    description: "Freaky retelling of that one Spongebob episode",
+    description: "The dude from that one Spongebob episode",
     image: "/nosferatu.jpg",
     picker: "Nathan",
-    contributors: ["Nathan Garcia", "Johann Ebrole", "Nigel Tomas", "Tisha Halim"],
+    contributors: ["Nathan Garcia", "Johann Ebrole", "Nigel Tomas", "Tisha Halim", "Gabe Apolinar"],
     comments: [
-      { author: "Johann Ebrole", text: "The cinematography was breathtaking." },
+      { author: "Johann Ebrole", text: "The cinematography was breathtaking" },
+      { author: "Tisha Halim", text: "1922 but make it freaky" },
       { author: "Nigel Tomas", text: "He got a bluetooth d***!" },
     ]
   },
@@ -58,12 +60,12 @@ export default function Page() {
         <section className="mb-16 space-y-2">
           <h2 className="text-sm font-medium tracking-wider text-muted-foreground">About</h2>
           <p className="leading-relaxed">
-            Our personal movie club, showcasing the movies we watch each months and our thoughts!
+            Journaling our group's movie watches and our thoughts!
           </p>
         </section>
 
         <section className="mb-16 space-y-4">
-          <h2 className="text-sm font-medium tracking-wider text-muted-foreground">People</h2>
+          <h2 className="text-sm font-medium tracking-wider text-muted-foreground">The Crew</h2>
           <div className="flex flex-wrap gap-4">
             {people.map((person) => (
               <div key={person.name} className="flex items-center space-x-2">
