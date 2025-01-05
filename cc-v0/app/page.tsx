@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Film, ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
@@ -82,7 +82,7 @@ export default function Page() {
         <section className="mb-16 space-y-2">
           <h2 className="text-sm font-medium tracking-wider text-muted-foreground">About</h2>
           <p className="leading-relaxed">
-            It all started with a shared love for movies and endless debates about plot twists. Now, we meet monthly to watch and discuss films, taking turns to pick the next screening. Some choices are profound, others are delightfully questionable – but that's what makes our movie club special.
+            We love Movies!
           </p>
         </section>
 
