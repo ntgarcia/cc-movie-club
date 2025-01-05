@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const config: Config = {
+const config = {
     darkMode: ["class"],
     content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,6 +8,13 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+	container: {
+		center: true,
+		padding: "2rem",
+		screens: {
+		  "2xl": "1400px",
+		},
+	  },
   	extend: {
   		colors: {
   			background: 'hsl(var(--background))',
@@ -59,6 +66,6 @@ const config: Config = {
   	}
   },
   plugins: [require("tailwindcss-animate")],
-}
+} satisfies Config
 
 export default config;
