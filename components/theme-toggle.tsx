@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Sun, Moon, Monitor } from "'lucide-react'"
+import { Sun, Moon, Monitor } from "lucide-react"
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -13,7 +13,7 @@ export function ThemeToggle() {
       <Button
         variant="ghost"
         size="icon"
-        className={`h-7 w-7 ${theme === "'light'" ? "'bg-muted'" : "''"}`}
+        className={`h-7 w-7 ${theme === "light" ? "bg-muted" : ""}`}
         onClick={() => setTheme("light")}
       >
         <Sun className="h-4 w-4" />
@@ -22,7 +22,7 @@ export function ThemeToggle() {
       <Button
         variant="ghost"
         size="icon"
-        className={`h-7 w-7 ${theme === "'dark'" ? "'bg-muted'" : "''"}`}
+        className={`h-7 w-7 ${theme === "dark" ? "bg-muted" : ""}`}
         onClick={() => setTheme("dark")}
       >
         <Moon className="h-4 w-4" />
@@ -31,7 +31,7 @@ export function ThemeToggle() {
       <Button
         variant="ghost"
         size="icon"
-        className={`h-7 w-7 ${theme === "'system'" ? "'bg-muted'" : "''"}`}
+        className={`h-7 w-7 ${theme === "system" ? "bg-muted" : ""}`}
         onClick={() => setTheme("system")}
       >
         <Monitor className="h-4 w-4" />
