@@ -1,11 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist, Azeret_Mono as Geist_Mono } from 'next/font/google'
-<<<<<<< HEAD
 import { ThemeProvider } from "@/components/theme-provider"
-import "./globals.css"
-=======
-import { ThemeProvider } from "@/Components/theme-provider"
->>>>>>> parent of 6ee897e (rollback)
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -43,4 +38,3 @@ export default function RootLayout({
     </html>
   )
 }
-
