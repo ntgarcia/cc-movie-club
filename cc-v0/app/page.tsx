@@ -60,7 +60,7 @@ export default function Page() {
         <section className="mb-16 space-y-2">
           <h2 className="text-sm font-medium tracking-wider text-muted-foreground">About</h2>
           <p className="leading-relaxed">
-            Journaling our group's movie watches and our thoughts!
+            Journaling our group movie watches & our thoughts!
           </p>
         </section>
 
