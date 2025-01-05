@@ -1,19 +1,19 @@
-import type { Metadata } from "next"
-import { Geist, Azeret_Mono as Geist_Mono } from "next/font/google"
+import type { Metadata } from 'next'
+import { Geist, Azeret_Mono as Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
 
 const geistSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-sans",
+  subsets: ['latin'],
+  variable: '--font-sans',
 })
 const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+  subsets: ['latin'],
+  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
-  title: "Creamcheese Movie Club",
-  description: "A showcase of our movie club picks and members",
+  title: 'Creamcheese Movie Club',
+  description: 'A showcase of our movie club picks and members',
 }
 
 export default function RootLayout({
@@ -39,3 +39,6 @@ export default function RootLayout({
   )
 }
 
+
+
+import './globals.css'
