@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Creamcheese Movie Club",
-  description: "A showcase of our movie club picks and members",
+  title: "Cream Cheese Movie Club",
+  description: "We love movies!",
 }
 
 export default function RootLayout({

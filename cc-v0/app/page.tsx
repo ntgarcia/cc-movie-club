@@ -49,7 +49,7 @@ export default function Page() {
             <AvatarImage src="/cc.png"/>
             <AvatarFallback>CC</AvatarFallback>
           </Avatar>
-          <h1 className="mb-4 text-base font-bold">Creamcheese Movie Club</h1>
+          <h1 className="mb-4 text-base font-bold">Cream Cheese Movie Club</h1>
           <div className="absolute right-4 top-4">
             <ThemeToggle />
           </div>
