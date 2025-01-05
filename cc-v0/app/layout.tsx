@@ -18,7 +18,11 @@ export const metadata: Metadata = {
   description: "A showcase of our movie club picks and members",
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
