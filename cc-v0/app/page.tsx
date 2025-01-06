@@ -1,6 +1,10 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -18,10 +22,10 @@ const people = [
 
 const movies = [
   {
-    title: "Harakiri",
+    title: "Harakiri (1962)",
     date: "January 2025",
     description:
-      "It means Seppuku which means to kill one's self from dishonour.",
+      "Aging samurai Hanshiro Tsugumo (Tatsuya Nakadai) arrives at the home of Kageyu Saito (Rentarô Mikuni) and asks to commit a ritual suicide on the property, which Saito thinks is a ploy to gain pity and a job. Saito tells Tsugumo of another samurai, Motome Chijiiwa (Yoshio Inaba), who threatened suicide as a stratagem, only to be forced to follow through on the task. When Tsugumo reveals that Chijiiwa was his son-in-law, the disclosure sets off a fierce conflict.",
     image: "/harakiri.jpg",
     picker: "Nigel",
     contributors: ["Nigel Tomas"],
@@ -46,19 +50,32 @@ const movies = [
       "Gabe Apolinar",
     ],
     comments: [
-      { author: "Johann Ebrole", text: "The cinematography was breathtaking" },
-      { author: "Tisha Halim", text: "1922 but make it freaky" },
-      { author: "Nigel Tomas", text: "He got a bluetooth d***!" },
+      {
+        author: "Johann Ebrole",
+        text: "The cinematography was breathtaking",
+      },
+      {
+        author: "Tisha Halim",
+        text: "1922 but make it freaky",
+      },
+      {
+        author: "Nigel Tomas",
+        text: "He got a bluetooth d***!",
+      },
     ],
   },
 ];
 
 export default function Page() {
-  const [expandedMovies, setExpandedMovies] = useState<string[]>([]);
+  const [expandedMovies, setExpandedMovies] = useState<
+    string[]
+  >([]);
 
   const toggleMovie = (title: string) => {
     setExpandedMovies((prev) =>
-      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
+      prev.includes(title)
+        ? prev.filter((t) => t !== title)
+        : [...prev, title]
     );
   };
 
@@ -70,7 +87,9 @@ export default function Page() {
             <AvatarImage src="/cc.png" />
             <AvatarFallback>CC</AvatarFallback>
           </Avatar>
-          <h1 className="mb-4 text-base font-bold">Cream Cheese Club</h1>
+          <h1 className="mb-4 text-base font-bold">
+            Cream Cheese Club
+          </h1>
           <div className="absolute right-4 top-4">
             <ThemeToggle />
           </div>
@@ -81,7 +100,8 @@ export default function Page() {
             About
           </h2>
           <p className="leading-relaxed">
-            Journaling our group movie watches & our thoughts!
+            Journaling our group movie watches & our
+            thoughts!
           </p>
         </section>
 
@@ -91,9 +111,15 @@ export default function Page() {
           </h2>
           <div className="flex flex-wrap gap-4">
             {people.map((person) => (
-              <div key={person.name} className="flex items-center space-x-2">
+              <div
+                key={person.name}
+                className="flex items-center space-x-2"
+              >
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src={person.avatar} alt={person.name} />
+                  <AvatarImage
+                    src={person.avatar}
+                    alt={person.name}
+                  />
                   <AvatarFallback>
                     {person.name
                       .split(" ")
@@ -101,7 +127,9 @@ export default function Page() {
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-sm">{person.name}</span>
+                <span className="text-sm">
+                  {person.name}
+                </span>
               </div>
             ))}
           </div>
@@ -115,10 +143,15 @@ export default function Page() {
             <div className="absolute left-0 top-0 h-full w-px bg-border" />
 
             {movies.map((movie) => {
-              const isExpanded = expandedMovies.includes(movie.title);
+              const isExpanded = expandedMovies.includes(
+                movie.title
+              );
 
               return (
-                <div key={movie.title} className="group relative">
+                <div
+                  key={movie.title}
+                  className="group relative"
+                >
                   <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
 
                   <div className="rounded-lg border transition-colors hover:bg-muted/50">
@@ -139,8 +172,12 @@ export default function Page() {
                             <h3 className="font-medium leading-none">
                               {movie.title}
                             </h3>
-                            <Badge variant="secondary" className="text-xs">
-                              Pick by {movie.picker.split(" ")[0]}
+                            <Badge
+                              variant="secondary"
+                              className="text-xs"
+                            >
+                              Pick by{" "}
+                              {movie.picker.split(" ")[0]}
                             </Badge>
                           </div>
                           <p className="mt-1 text-sm text-muted-foreground">
@@ -153,32 +190,39 @@ export default function Page() {
 
                         <div className="flex items-center gap-4">
                           <div className="hidden sm:flex -space-x-2 shrink-0">
-                            {movie.contributors.map((contributor) => (
-                              <Avatar
-                                key={contributor}
-                                className="h-6 w-6 border-2 border-background"
-                              >
-                                <AvatarImage
-                                  src={
-                                    people.find((p) => p.name === contributor)
-                                      ?.avatar
-                                  }
-                                  alt={contributor}
-                                />
-                                <AvatarFallback>
-                                  {contributor
-                                    .split(" ")
-                                    .map((n) => n[0])
-                                    .join("")}
-                                </AvatarFallback>
-                              </Avatar>
-                            ))}
+                            {movie.contributors.map(
+                              (contributor) => (
+                                <Avatar
+                                  key={contributor}
+                                  className="h-6 w-6 border-2 border-background"
+                                >
+                                  <AvatarImage
+                                    src={
+                                      people.find(
+                                        (p) =>
+                                          p.name ===
+                                          contributor
+                                      )?.avatar
+                                    }
+                                    alt={contributor}
+                                  />
+                                  <AvatarFallback>
+                                    {contributor
+                                      .split(" ")
+                                      .map((n) => n[0])
+                                      .join("")}
+                                  </AvatarFallback>
+                                </Avatar>
+                              )
+                            )}
                           </div>
                           <Button
                             variant="ghost"
                             size="icon"
                             className="h-8 w-8 shrink-0"
-                            onClick={() => toggleMovie(movie.title)}
+                            onClick={() =>
+                              toggleMovie(movie.title)
+                            }
                           >
                             {isExpanded ? (
                               <ChevronUp className="h-4 w-4" />
@@ -192,36 +236,49 @@ export default function Page() {
 
                     {isExpanded && (
                       <div className="border-t bg-muted/50 px-4 py-3">
-                        <h4 className="mb-2 text-sm font-medium">Comments</h4>
+                        <h4 className="mb-2 text-sm font-medium">
+                          Comments
+                        </h4>
                         <div className="space-y-3">
-                          {movie.comments.map((comment, index) => (
-                            <div key={index} className="flex items-start gap-2">
-                              <Avatar className="h-6 w-6">
-                                <AvatarImage
-                                  src={
-                                    people.find(
-                                      (p) => p.name === comment.author
-                                    )?.avatar
-                                  }
-                                  alt={comment.author}
-                                />
-                                <AvatarFallback>
-                                  {comment.author
-                                    .split(" ")
-                                    .map((n) => n[0])
-                                    .join("")}
-                                </AvatarFallback>
-                              </Avatar>
-                              <div className="flex-1">
-                                <p className="text-sm font-medium">
-                                  {comment.author.split(" ")[0]}
-                                </p>
-                                <p className="text-sm text-muted-foreground">
-                                  {comment.text}
-                                </p>
+                          {movie.comments.map(
+                            (comment, index) => (
+                              <div
+                                key={index}
+                                className="flex items-start gap-2"
+                              >
+                                <Avatar className="h-6 w-6">
+                                  <AvatarImage
+                                    src={
+                                      people.find(
+                                        (p) =>
+                                          p.name ===
+                                          comment.author
+                                      )?.avatar
+                                    }
+                                    alt={comment.author}
+                                  />
+                                  <AvatarFallback>
+                                    {comment.author
+                                      .split(" ")
+                                      .map((n) => n[0])
+                                      .join("")}
+                                  </AvatarFallback>
+                                </Avatar>
+                                <div className="flex-1">
+                                  <p className="text-sm font-medium">
+                                    {
+                                      comment.author.split(
+                                        " "
+                                      )[0]
+                                    }
+                                  </p>
+                                  <p className="text-sm text-muted-foreground">
+                                    {comment.text}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            )
+                          )}
                         </div>
                       </div>
                     )}
