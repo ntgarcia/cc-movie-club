@@ -30,6 +30,16 @@ const movies = [
       { author: "Nigel Tomas", text: "He got a bluetooth d***!" },
     ]
   },
+  { 
+    title: "Harakiri", 
+    date: "January 2025",
+    description: "It means Seppuku which means to die from dishonour.",
+    image: "/harakiri.jpg",
+    picker: "Nigel",
+    contributors: ["Nathan Garcia", "Johann Ebrole", "Nigel Tomas", "Tisha Halim", "Gabe Apolinar"],
+    comments: [
+    ]
+  },
 ]
 
 export default function Page() {
@@ -108,7 +118,7 @@ export default function Page() {
                           <div className="flex items-center gap-2">
                             <h3 className="font-medium leading-none">{movie.title}</h3>
                             <Badge variant="secondary" className="text-xs">
-                              Picked by {movie.picker.split(' ')[0]}
+                              Pick by {movie.picker.split(' ')[0]}
                             </Badge>
                           </div>
                           <p className="mt-1 text-sm text-muted-foreground">{movie.date}</p>
