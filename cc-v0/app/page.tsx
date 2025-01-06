@@ -18,6 +18,16 @@ const people = [
 
 const movies = [
   { 
+    title: "Harakiri", 
+    date: "January 2025",
+    description: "It means Seppuku which means to kill one's self from dishonour.",
+    image: "/harakiri.jpg",
+    picker: "Nigel",
+    contributors: [],
+    comments: [
+    ]
+  },
+  { 
     title: "Nosferatu", 
     date: "December 2024",
     description: "The dude from that one Spongebob episode",
@@ -28,16 +38,6 @@ const movies = [
       { author: "Johann Ebrole", text: "The cinematography was breathtaking" },
       { author: "Tisha Halim", text: "1922 but make it freaky" },
       { author: "Nigel Tomas", text: "He got a bluetooth d***!" },
-    ]
-  },
-  { 
-    title: "Harakiri", 
-    date: "January 2025",
-    description: "It means Seppuku which means to die from dishonour.",
-    image: "/harakiri.jpg",
-    picker: "Nigel",
-    contributors: ["Nathan Garcia", "Johann Ebrole", "Nigel Tomas", "Tisha Halim", "Gabe Apolinar"],
-    comments: [
     ]
   },
 ]
