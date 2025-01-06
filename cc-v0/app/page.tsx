@@ -25,7 +25,7 @@ const movies = [
     title: "Harakiri (1962)",
     date: "January 2025",
     description:
-      "Aging samurai Hanshiro Tsugumo (Tatsuya Nakadai) arrives at the home of Kageyu Saito (Rentarô Mikuni) and asks to commit a ritual suicide on the property, which Saito thinks is a ploy to gain pity and a job. Saito tells Tsugumo of another samurai, Motome Chijiiwa (Yoshio Inaba), who threatened suicide as a stratagem, only to be forced to follow through on the task. When Tsugumo reveals that Chijiiwa was his son-in-law, the disclosure sets off a fierce conflict.",
+      "When a ronin requesting seppuku at a feudal lord's palace is told of the brutal suicide of another ronin who previously visited, he reveals how their pasts are intertwined - and in doing so challenges the clan's integrity.",
     image: "/harakiri.jpg",
     picker: "Nigel",
     contributors: ["Nigel Tomas"],
