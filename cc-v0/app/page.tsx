@@ -14,9 +14,31 @@ const people = [
   { name: "Nigel Tomas", avatar: "/ng.jpg" },
   { name: "Tisha Halim", avatar: "/th.jpg" },
   { name: "Gabe Apolinar", avatar: "/ga.jpg" },
+  { name: "Jillian Muli", avatar: "/jml.jpg" },
+  { name: "Jared Madayag", avatar: "/jmd.jpg" },
 ];
 
 const movies = [
+  {
+    title: "The Brutalist",
+    date: "January 2025",
+    description:
+      "Escaping postwar Europe, a visionary architect comes to America to rebuild his life, his career, and his marriage. On his own in a strange new country, he settles in Pennsylvania, where a wealthy and prominent industrialist recognises his talent.",
+    image: "/brutalist.jpg",
+    picker: "Nathan",
+    contributors: [
+      "Nigel Tomas",
+      "Nathan Garcia",
+      "Jillian Muli",
+      "Jared Madayag",
+    ],
+    comments: [
+      {
+        author: "Nathan Garcia",
+        text: "The first half was absolutely amazing in terms of inspiration and hope, the main theme blasting was insane in IMAX. After the intermission it felt like a fumble to me, but it does offer realistic bleakness in terms of what the American Dream entails for foreigners.",
+      },
+    ],
+  },
   {
     title: "Harakiri (1962)",
     date: "January 2025",
@@ -24,7 +46,7 @@ const movies = [
       "When a ronin requesting seppuku at a feudal lord's palace is told of the brutal suicide of another ronin who previously visited, he reveals how their pasts are intertwined - and in doing so challenges the clan's integrity.",
     image: "/harakiri.jpg",
     picker: "Nigel",
-    contributors: ["Nigel Tomas", "Nathan Garcia"],
+    contributors: ["Nigel Tomas", "Nathan Garcia", "Johann Ebrole"],
     comments: [
       {
         author: "Nigel Tomas",
@@ -34,12 +56,17 @@ const movies = [
         author: "Nathan Garcia",
         text: "Although slow start the cinematography dialogue lighting etc. all feel timeless. Genuinely surprised this was from the 60s. As the story unraveled it only got even more peak. Especially the journey to and of the duel was insane",
       },
+      {
+        author: "Johann Ebrole",
+        text: "10/10 for me, I didn't really find it slow i was hooked throughout",
+      },
     ],
   },
   {
     title: "Nosferatu",
     date: "December 2024",
-    description: "The dude from that one Spongebob episode",
+    description:
+      "In the 1830s, estate agent Thomas Hutter travels to Transylvania for a fateful meeting with Count Orlok, a prospective client. In his absence, Hutter's new bride, Ellen, is left under the care of their friends, Friedrich and Anna Harding. Plagued by horrific visions and an increasing sense of dread, Ellen soon encounters an evil force that's far beyond her control.",
     image: "/nosferatu.jpg",
     picker: "Nathan",
     contributors: [
@@ -79,28 +106,28 @@ export default function Page() {
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-2xl px-4 py-12">
         <header className="mb-8 flex flex-col items-left">
-          <Avatar className="h-8 w-8 mb-4">
-            <AvatarImage src="/cc.png" />
-            <AvatarFallback>CC</AvatarFallback>
-          </Avatar>
-          <h1 className="mb-4 text-base font-bold">Cream Cheese Club</h1>
-          <div className="absolute right-4 top-4">
-            <ThemeToggle />
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <Avatar className="h-8 w-8 mb-4">
+                <AvatarImage src="/cc.png" />
+                <AvatarFallback>CC</AvatarFallback>
+              </Avatar>
+              <h1 className="mb-4 text-base font-bold ml-2">
+                Cream Cheese Club
+              </h1>
+            </div>
+            <div className="mb-4">
+              <ThemeToggle />
+            </div>
           </div>
-        </header>
-
-        <section className="mb-16 space-y-2">
-          <h2 className="text-sm font-medium tracking-wider text-muted-foreground">
-            About
-          </h2>
           <p className="leading-relaxed">
             Journaling our group movie watches & our thoughts!
           </p>
-        </section>
+        </header>
 
         <section className="mb-16 space-y-4">
           <h2 className="text-sm font-medium tracking-wider text-muted-foreground">
-            The Crew
+            Movie Lovers
           </h2>
           <div className="flex flex-wrap gap-4">
             {people.map((person) => (
@@ -135,71 +162,109 @@ export default function Page() {
                   <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
 
                   <div className="rounded-lg border transition-colors hover:bg-muted/50">
-                    <div className="p-4">
-                      <div className="flex items-start gap-4">
-                        <div className="shrink-0">
-                          <Image
-                            src={movie.image}
-                            alt={movie.title}
-                            width={80}
-                            height={120}
-                            className="rounded-md object-cover"
-                          />
-                        </div>
+                    <div className="p-4 flex flex-col sm:flex-row gap-4">
+                      <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
+                        <Image
+                          src={movie.image}
+                          alt={movie.title}
+                          fill
+                          className="rounded-md object-cover"
+                        />
+                      </div>
 
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex justify-between">
+                          <div className="flex flex-row items-center gap-2">
                             <h3 className="font-medium leading-none">
                               {movie.title}
                             </h3>
-                            <Badge variant="secondary" className="text-xs">
+                            <Badge
+                              variant="secondary"
+                              className="text-xs w-fit"
+                            >
                               Pick by {movie.picker.split(" ")[0]}
                             </Badge>
                           </div>
-                          <p className="mt-1 text-sm text-muted-foreground">
-                            {movie.date}
-                          </p>
-                          <p className="mt-2 text-sm text-muted-foreground">
-                            {movie.description}
-                          </p>
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                          <div className="hidden sm:flex -space-x-2 shrink-0">
-                            {movie.contributors.map((contributor) => (
-                              <Avatar
-                                key={contributor}
-                                className="h-6 w-6 border-2 border-background"
-                              >
-                                <AvatarImage
-                                  src={
-                                    people.find((p) => p.name === contributor)
-                                      ?.avatar
-                                  }
-                                  alt={contributor}
-                                />
-                                <AvatarFallback>
-                                  {contributor
-                                    .split(" ")
-                                    .map((n) => n[0])
-                                    .join("")}
-                                </AvatarFallback>
-                              </Avatar>
-                            ))}
+                          <div className="flex flex-row items-center gap-2">
+                            <div className="flex -space-x-2 shrink-0">
+                              {movie.contributors.map((contributor) => (
+                                <Avatar
+                                  key={contributor}
+                                  className="h-6 w-6 border-2 border-background"
+                                >
+                                  <AvatarImage
+                                    src={
+                                      people.find((p) => p.name === contributor)
+                                        ?.avatar
+                                    }
+                                    alt={contributor}
+                                  />
+                                  <AvatarFallback>
+                                    {contributor
+                                      .split(" ")
+                                      .map((n) => n[0])
+                                      .join("")}
+                                  </AvatarFallback>
+                                </Avatar>
+                              ))}
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 shrink-0"
+                              onClick={() => toggleMovie(movie.title)}
+                            >
+                              {isExpanded ? (
+                                <ChevronUp className="h-4 w-4" />
+                              ) : (
+                                <ChevronDown className="h-4 w-4" />
+                              )}
+                            </Button>
                           </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 shrink-0"
-                            onClick={() => toggleMovie(movie.title)}
-                          >
-                            {isExpanded ? (
-                              <ChevronUp className="h-4 w-4" />
-                            ) : (
-                              <ChevronDown className="h-4 w-4" />
-                            )}
-                          </Button>
                         </div>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          {movie.date}
+                        </p>
+                        <p className="mt-2 text-sm text-muted-foreground">
+                          {movie.description}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        {/* <div className="flex -space-x-2 shrink-0">
+                          {movie.contributors.map((contributor) => (
+                            <Avatar
+                              key={contributor}
+                              className="h-6 w-6 border-2 border-background"
+                            >
+                              <AvatarImage
+                                src={
+                                  people.find((p) => p.name === contributor)
+                                    ?.avatar
+                                }
+                                alt={contributor}
+                              />
+                              <AvatarFallback>
+                                {contributor
+                                  .split(" ")
+                                  .map((n) => n[0])
+                                  .join("")}
+                              </AvatarFallback>
+                            </Avatar>
+                          ))}
+                        </div> */}
+                        {/* <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 shrink-0"
+                          onClick={() => toggleMovie(movie.title)}
+                        >
+                          {isExpanded ? (
+                            <ChevronUp className="h-4 w-4" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4" />
+                          )}
+                        </Button> */}
                       </div>
                     </div>
 
