@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const people = [
+  { name: "Cream Cheese", avatar: "/cc.png" },
   { name: "Nathan Garcia", avatar: "/nt.jpg" },
   { name: "Johann Ebrole", avatar: "/jn.jpg" },
   { name: "Nigel Tomas", avatar: "/ng.jpg" },
@@ -19,6 +20,25 @@ const people = [
 ];
 
 const movies = [
+  {
+    title: "Conclave",
+    date: "February 2025",
+    description:
+      "After the unexpected death of the Pope, Cardinal Lawrence is tasked with managing the covert and ancient ritual of electing a new one. Sequestered in the Vatican with the Catholic Church’s most powerful leaders until the process is complete, Lawrence finds himself at the center of a conspiracy that could lead to its downfall.",
+    image: "/conclave.jpeg",
+    picker: "Nathan",
+    contributors: ["Nigel Tomas", "Jillian Muli", "Jared Madayag"],
+    comments: [
+      {
+        author: "Tisha Halim",
+        text: "THE GIRLS ARE FIGHTINGGGG",
+      },
+      {
+        author: "Nathan Garcia",
+        text: "The portrayal of the Catholic Conclave gives me a greater sense of Hope for the future than I should have really",
+      },
+
+  },
   {
     title: "The Rider",
     date: "February 2025",
@@ -39,6 +59,21 @@ const movies = [
       {
         author: "Jared Madayag",
         text: "I give it 7 big neighs",
+      },
+    ],
+  },
+  {
+    title: "Girl, Interrupted",
+    date: "February 2025",
+    description:
+      "A young woman finds herself at a renowned mental institution for troubled young women, where she must choose between the world of people who belong on the inside or the often difficult world of reality on the outside.",
+    image: "/girl.png",
+    picker: "Tisha Halim",
+    contributors: ["Cream Cheese"],
+    comments: [
+      {
+        author: "Tisha Halim",
+        text: "there’s just something about movies with 2 lead women that just draws me in…. the acting in all departments is off the roof… everyone is just so good in their roles in my opinion…",
       },
     ],
   },
