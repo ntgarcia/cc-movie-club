@@ -37,7 +37,7 @@ const movies = [
         author: "Nathan Garcia",
         text: "The portrayal of the Catholic Conclave gives me a greater sense of Hope for the future than I should have really",
       },
-
+    ],
   },
   {
     title: "The Rider",
