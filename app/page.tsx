@@ -20,6 +20,29 @@ const people = [
 
 const movies = [
   {
+    title: "The Rider",
+    date: "February 2025",
+    description:
+      "After horrific riding accident leaves him unable to compete in the rodeo circuit, a young cowboy is forced to look for a new purpose.",
+    image: "/rider.jpg",
+    picker: "Nathan",
+    contributors: ["Nigel Tomas", "Jillian Muli", "Jared Madayag"],
+    comments: [
+      {
+        author: "Nigel Tomas",
+        text: "Movie was nice. 7/10 I don’t like horses",
+      },
+      {
+        author: "Jillian Muli",
+        text: "8/10 🐎🐎",
+      },
+      {
+        author: "Jared Madayag",
+        text: "I give it 7 big neighs",
+      },
+    ],
+  },
+  {
     title: "The Brutalist",
     date: "January 2025",
     description:
