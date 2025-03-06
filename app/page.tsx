@@ -27,7 +27,7 @@ const movies = [
       "After the unexpected death of the Pope, Cardinal Lawrence is tasked with managing the covert and ancient ritual of electing a new one. Sequestered in the Vatican with the Catholic Church’s most powerful leaders until the process is complete, Lawrence finds himself at the center of a conspiracy that could lead to its downfall.",
     image: "/conclave.jpeg",
     picker: "Nathan",
-    contributors: ["Nigel Tomas", "Jillian Muli", "Jared Madayag"],
+    contributors: ["Cream Cheese"],
     comments: [
       {
         author: "Tisha Halim",
