@@ -42,6 +42,79 @@ interface Movie {
   comments: Comment[];
 }
 
+// SignUp Component
+const SignUp = ({ onSignUp }: { onSignUp: () => void }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    if (error) console.error("Error signing up:", error);
+    else onSignUp(); // Call the onSignUp function to refresh the UI
+  };
+
+  return (
+    <form onSubmit={handleSignUp}>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <button type="submit">Sign Up</button>
+    </form>
+  );
+};
+
+// SignIn Component
+const SignIn = ({ onSignIn }: { onSignIn: () => void }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { error } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+    if (error) console.error("Error signing in:", error);
+    else onSignIn();
+  };
+
+  return (
+    <form onSubmit={handleSignIn}>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <button type="submit">Sign In</button>
+    </form>
+  );
+};
+
 export default function Page() {
   const [people, setPeople] = useState<Person[]>([]);
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -50,6 +123,7 @@ export default function Page() {
   >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -133,6 +207,25 @@ export default function Page() {
     acc[month].push(movie);
     return acc;
   }, {} as { [key: string]: typeof movies });
+
+  const handleSignUp = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleSignIn = () => {
+    setIsLoggedIn(true);
+  };
+
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4 max-w-md text-center px-4">
+          <SignUp onSignUp={handleSignUp} />
+          <SignIn onSignIn={handleSignIn} />
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
