@@ -15,7 +15,12 @@ import { supabase } from "@/lib/supabase";
 declare const hcaptcha: {
   render: (
     container: string | HTMLElement,
-    options: any
+    options: {
+      sitekey: string;
+      theme?: string;
+      size?: string;
+      callback?: (token: string) => void;
+    }
   ) => string;
   execute: (widgetId?: string) => Promise<string>;
 };
@@ -25,8 +30,6 @@ interface AuthFormProps {
   setMode: (mode: "signin" | "signup") => void;
   onAuthSuccess: () => void;
 }
-
-const SITE_KEY = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 
 export function AuthForm({
   mode,
