@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { createInviteCode } from "@/lib/utils/invites";
 
 export function InviteGenerator() {
   const [email, setEmail] = useState("");
@@ -17,25 +18,10 @@ export function InviteGenerator() {
     setLoading(true);
 
     try {
-      const user = (await supabase.auth.getUser()).data
-        .user;
-
-      // Generate a random code
-      const code = Math.random()
-        .toString(36)
-        .substring(2, 15);
-
-      const { error } = await supabase
-        .from("invites")
-        .insert({
-          code,
-          email: email || null,
-          created_by: user?.id,
-        });
-
-      if (error) throw error;
-
-      toast.success(`Invite code generated: ${code}`);
+      const invite = await createInviteCode(email);
+      toast.success(
+        `Invite code generated: ${invite.code}`
+      );
       setEmail("");
     } catch (error) {
       toast.error("Error generating invite code");

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { validateInviteCode } from "@/lib/utils/invites";
 
 interface SignUpFormProps {
   setMode: (mode: "signin" | "signup") => void;
@@ -28,41 +29,17 @@ export function SignUpForm({
     setLoading(true);
 
     try {
-      // First verify the invite code
-      const { data: invite, error: inviteError } =
-        await supabase
-          .from("invites")
-          .select("*")
-          .eq("code", inviteCode)
-          .single();
+      // Validate invite code first
+      await validateInviteCode(inviteCode);
 
-      if (inviteError || !invite) {
-        toast.error("Invalid invite code");
-        return;
-      }
+      // If validation passes, proceed with signup
+      const { error: signUpError } =
+        await supabase.auth.signUp({
+          email,
+          password,
+        });
 
-      if (invite.used) {
-        toast.error(
-          "This invite code has already been used"
-        );
-        return;
-      }
-
-      if (
-        invite.expires_at &&
-        new Date(invite.expires_at) < new Date()
-      ) {
-        toast.error("This invite code has expired");
-        return;
-      }
-
-      // If invite is valid, proceed with signup
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (error) throw error;
+      if (signUpError) throw signUpError;
 
       // Mark invite as used
       const { error: updateError } = await supabase
@@ -80,7 +57,11 @@ export function SignUpForm({
       toast.success("Signed up successfully!");
       onAuthSuccess();
     } catch (error) {
-      toast.error("Error during sign up");
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Error during sign up"
+      );
       console.error(error);
     } finally {
       setLoading(false);
