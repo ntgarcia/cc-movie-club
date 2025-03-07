@@ -23,11 +23,15 @@ export function AuthDialog({
     "signin"
   );
 
+  if (isLoggedIn) {
+    return null; // Don't show dialog if logged in
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
-          {isLoggedIn ? "Account" : "Sign In"}
+          Sign In
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[400px] border-none p-0">

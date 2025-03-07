@@ -118,6 +118,26 @@ export default function Page() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    // Check auth status on load
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        setIsLoggedIn(!!session);
+      });
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setIsLoggedIn(!!session);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   const toggleMovie = (title: string) => {
     setExpandedMovies((prev) =>
       prev.includes(title)

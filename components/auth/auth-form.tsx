@@ -1,6 +1,7 @@
 "use client";
 
-import { LoginForm } from "@/components/login-form";
+import { SignInForm } from "@/components/auth/sign-in-form";
+import { SignUpForm } from "@/components/auth/sign-up-form";
 
 interface AuthFormProps {
   mode: "signin" | "signup";
@@ -12,7 +13,11 @@ export function AuthForm(props: AuthFormProps) {
   return (
     <div className="flex w-full items-center justify-center">
       <div className="w-full max-w-sm">
-        <LoginForm {...props} />
+        {props.mode === "signin" ? (
+          <SignInForm {...props} />
+        ) : (
+          <SignUpForm {...props} />
+        )}
       </div>
     </div>
   );
