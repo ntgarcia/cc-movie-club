@@ -19,6 +19,9 @@ export function AuthDialog({
   onAuthSuccess,
 }: AuthDialogProps) {
   const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<"signin" | "signup">(
+    "signin"
+  );
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -27,8 +30,10 @@ export function AuthDialog({
           {isLoggedIn ? "Account" : "Sign In"}
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[400px] border-none p-0">
         <AuthForm
+          mode={mode}
+          setMode={setMode}
           onAuthSuccess={() => {
             onAuthSuccess();
             setOpen(false);
