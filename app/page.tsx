@@ -90,12 +90,14 @@ export default function Page() {
           (movie) => ({
             ...movie,
             contributors: movie.movie_contributors.map(
-              (mc) => mc.contributor
+              (mc: { contributor: any }) => mc.contributor
             ),
-            comments: movie.comments.map((comment) => ({
-              ...comment,
-              author: comment.author,
-            })),
+            comments: movie.comments.map(
+              (comment: { author: any }) => ({
+                ...comment,
+                author: comment.author,
+              })
+            ),
           })
         );
 
