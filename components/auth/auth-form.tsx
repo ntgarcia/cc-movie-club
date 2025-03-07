@@ -12,11 +12,21 @@ import {
 } from "@/components/ui/card";
 import { supabase } from "@/lib/supabase";
 
+declare const hcaptcha: {
+  render: (
+    container: string | HTMLElement,
+    options: any
+  ) => string;
+  execute: (widgetId?: string) => Promise<string>;
+};
+
 interface AuthFormProps {
   mode: "signin" | "signup";
   setMode: (mode: "signin" | "signup") => void;
   onAuthSuccess: () => void;
 }
+
+const SITE_KEY = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 
 export function AuthForm({
   mode,
@@ -45,6 +55,9 @@ export function AuthForm({
         const { error } = await supabase.auth.signUp({
           email,
           password,
+          options: {
+            captchaToken: await generateCaptchaToken(),
+          },
         });
         if (error) throw error;
       }
@@ -60,6 +73,16 @@ export function AuthForm({
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const generateCaptchaToken = async () => {
+    try {
+      const token = await hcaptcha.execute();
+      return token;
+    } catch (error) {
+      console.error("hCaptcha error:", error);
+      throw new Error("Failed to verify captcha");
     }
   };
 
