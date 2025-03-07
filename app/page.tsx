@@ -16,6 +16,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
+import { AuthDialog } from "@/components/auth/auth-dialog";
 
 interface Person {
   id: string;
@@ -41,79 +42,6 @@ interface Movie {
   contributors: Person[];
   comments: Comment[];
 }
-
-// SignUp Component
-const SignUp = ({ onSignUp }: { onSignUp: () => void }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    if (error) console.error("Error signing up:", error);
-    else onSignUp(); // Call the onSignUp function to refresh the UI
-  };
-
-  return (
-    <form onSubmit={handleSignUp}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Sign Up</button>
-    </form>
-  );
-};
-
-// SignIn Component
-const SignIn = ({ onSignIn }: { onSignIn: () => void }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { error } =
-      await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-    if (error) console.error("Error signing in:", error);
-    else onSignIn();
-  };
-
-  return (
-    <form onSubmit={handleSignIn}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Sign In</button>
-    </form>
-  );
-};
 
 export default function Page() {
   const [people, setPeople] = useState<Person[]>([]);
@@ -208,25 +136,6 @@ export default function Page() {
     return acc;
   }, {} as { [key: string]: typeof movies });
 
-  const handleSignUp = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleSignIn = () => {
-    setIsLoggedIn(true);
-  };
-
-  if (!isLoggedIn) {
-    return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4 max-w-md text-center px-4">
-          <SignUp onSignUp={handleSignUp} />
-          <SignIn onSignIn={handleSignIn} />
-        </div>
-      </div>
-    );
-  }
-
   if (loading) {
     return (
       <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
@@ -258,17 +167,17 @@ export default function Page() {
     );
   }
 
-  if (!movies.length) {
-    return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="flex flex-col items-center gap-2 max-w-md text-center px-4">
-          <p className="text-muted-foreground">
-            No movies found
-          </p>
-        </div>
-      </div>
-    );
-  }
+  // if (!movies.length) {
+  //   return (
+  //     <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+  //       <div className="flex flex-col items-center gap-2 max-w-md text-center px-4">
+  //         <p className="text-muted-foreground">
+  //           No movies found
+  //         </p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -284,7 +193,11 @@ export default function Page() {
                 Cream Cheese Club
               </h1>
             </div>
-            <div className="mb-4">
+            <div className="mb-4 flex items-center gap-2">
+              <AuthDialog
+                isLoggedIn={isLoggedIn}
+                onAuthSuccess={() => setIsLoggedIn(true)}
+              />
               <ThemeToggle />
             </div>
           </div>
