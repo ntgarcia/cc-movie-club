@@ -1,16 +1,13 @@
 "use client";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const people = [
   {
@@ -84,11 +81,7 @@ const movies = [
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3tbWEMRSU3oOYrDFX1UfTwu0kMRSg7hIctHxs",
     picker: "Nathan",
-    contributors: [
-      "Nigel Tomas",
-      "Jillian Muli",
-      "Jared Madayag",
-    ],
+    contributors: ["Nigel Tomas", "Jillian Muli", "Jared Madayag"],
     comments: [
       {
         author: "Nigel Tomas",
@@ -149,11 +142,7 @@ const movies = [
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3XQQl1USOcWgpi2klhJ1dxA7n4S6COK5PfuQM",
     picker: "Nigel",
-    contributors: [
-      "Nigel Tomas",
-      "Nathan Garcia",
-      "Johann Ebrole",
-    ],
+    contributors: ["Nigel Tomas", "Nathan Garcia", "Johann Ebrole"],
     comments: [
       {
         author: "Nigel Tomas",
@@ -202,15 +191,11 @@ const movies = [
 ];
 
 export default function Page() {
-  const [expandedMovies, setExpandedMovies] = useState<
-    string[]
-  >([]);
+  const [expandedMovies, setExpandedMovies] = useState<string[]>([]);
 
   const toggleMovie = (title: string) => {
     setExpandedMovies((prev) =>
-      prev.includes(title)
-        ? prev.filter((t) => t !== title)
-        : [...prev, title]
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
     );
   };
 
@@ -238,13 +223,18 @@ export default function Page() {
                 Cream Cheese Club
               </h1>
             </div>
-            <div className="mb-4">
+            <div className="mb-4 flex gap-4">
               <ThemeToggle />
+              <div className="col-6 form-widget">
+                <Button>
+                  {" "}
+                  <Link href="/login">Login</Link>
+                </Button>
+              </div>
             </div>
           </div>
           <p className="leading-relaxed">
-            Journaling our group movie watches & our
-            thoughts!
+            Journaling our group movie watches & our thoughts!
           </p>
         </header>
 
@@ -254,15 +244,9 @@ export default function Page() {
           </h2>
           <div className="flex flex-wrap -space-x-2 sm:-space-x-0 sm:gap-4">
             {people.map((person) => (
-              <div
-                key={person.name}
-                className="flex items-center"
-              >
+              <div key={person.name} className="flex items-center">
                 <Avatar className="h-8 w-8 border-2 border-background sm:mr-2">
-                  <AvatarImage
-                    src={person.avatar}
-                    alt={person.name}
-                  />
+                  <AvatarImage src={person.avatar} alt={person.name} />
                   <AvatarFallback>
                     {person.name
                       .split(" ")
@@ -270,9 +254,7 @@ export default function Page() {
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-sm hidden sm:flex">
-                  {person.name}
-                </span>
+                <span className="text-sm hidden sm:flex">{person.name}</span>
               </div>
             ))}
           </div>
@@ -285,160 +267,128 @@ export default function Page() {
           <div className="relative space-y-4 pl-4">
             <div className="absolute left-0 top-0 h-full w-px bg-border" />
 
-            {Object.entries(groupedMovies).map(
-              ([month, movies]) => (
-                <div key={month}>
-                  <h3 className="text-sm font-medium mb-4">
-                    {month}
-                  </h3>
-                  {movies.map((movie) => {
-                    const isExpanded =
-                      expandedMovies.includes(movie.title);
+            {Object.entries(groupedMovies).map(([month, movies]) => (
+              <div key={month}>
+                <h3 className="text-sm font-medium mb-4">{month}</h3>
+                {movies.map((movie) => {
+                  const isExpanded = expandedMovies.includes(movie.title);
 
-                    return (
-                      <div
-                        key={movie.title}
-                        className="group relative"
-                      >
-                        <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
+                  return (
+                    <div key={movie.title} className="group relative">
+                      <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
 
-                        <div className="rounded-lg border transition-colors hover:bg-muted/50 mb-2">
-                          <div className="p-4 flex flex-col sm:flex-row gap-4">
-                            <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
-                              <Image
-                                src={movie.image}
-                                alt={movie.title}
-                                fill
-                                unoptimized
-                                className="rounded-md object-cover"
-                              />
-                            </div>
-
-                            <div className="flex-1 min-w-0">
-                              <div className="flex justify-between">
-                                <div className="flex flex-row items-center gap-2">
-                                  <h3 className="font-medium leading-none">
-                                    {movie.title}
-                                  </h3>
-                                  {/* <p className="hidden sm:flex mt-1 text-sm text-muted-foreground">
-                                  {movie.date}
-                                </p> */}
-                                </div>
-                                <div className="flex flex-row items-center gap-2">
-                                  <div className="flex -space-x-2 shrink-0">
-                                    {movie.contributors.map(
-                                      (contributor) => (
-                                        <Avatar
-                                          key={contributor}
-                                          className="h-6 w-6 border-2 border-background"
-                                        >
-                                          <AvatarImage
-                                            src={
-                                              people.find(
-                                                (p) =>
-                                                  p.name ===
-                                                  contributor
-                                              )?.avatar
-                                            }
-                                            alt={
-                                              contributor
-                                            }
-                                          />
-                                          <AvatarFallback>
-                                            {contributor
-                                              .split(" ")
-                                              .map(
-                                                (n) => n[0]
-                                              )
-                                              .join("")}
-                                          </AvatarFallback>
-                                        </Avatar>
-                                      )
-                                    )}
-                                  </div>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-8 w-8 shrink-0"
-                                    onClick={() =>
-                                      toggleMovie(
-                                        movie.title
-                                      )
-                                    }
-                                  >
-                                    {isExpanded ? (
-                                      <ChevronUp className="h-4 w-4" />
-                                    ) : (
-                                      <ChevronDown className="h-4 w-4" />
-                                    )}
-                                  </Button>
-                                </div>
-                              </div>
-                              <p className="mt-2 text-sm text-muted-foreground">
-                                {movie.description}
-                              </p>
-                            </div>
+                      <div className="rounded-lg border transition-colors hover:bg-muted/50 mb-2">
+                        <div className="p-4 flex flex-col sm:flex-row gap-4">
+                          <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
+                            <Image
+                              src={movie.image}
+                              alt={movie.title}
+                              fill
+                              unoptimized
+                              className="rounded-md object-cover"
+                            />
                           </div>
 
-                          {isExpanded && (
-                            <div className="border-t bg-muted/50 px-4 py-3">
-                              <h4 className="mb-2 text-sm font-medium">
-                                Comments
-                              </h4>
-                              <div className="space-y-3">
-                                {movie.comments.map(
-                                  (comment, index) => (
-                                    <div
-                                      key={index}
-                                      className="flex items-start gap-2"
+                          <div className="flex-1 min-w-0">
+                            <div className="flex justify-between">
+                              <div className="flex flex-row items-center gap-2">
+                                <h3 className="font-medium leading-none">
+                                  {movie.title}
+                                </h3>
+                                {/* <p className="hidden sm:flex mt-1 text-sm text-muted-foreground">
+                                  {movie.date}
+                                </p> */}
+                              </div>
+                              <div className="flex flex-row items-center gap-2">
+                                <div className="flex -space-x-2 shrink-0">
+                                  {movie.contributors.map((contributor) => (
+                                    <Avatar
+                                      key={contributor}
+                                      className="h-6 w-6 border-2 border-background"
                                     >
-                                      <Avatar className="h-6 w-6">
-                                        <AvatarImage
-                                          src={
-                                            people.find(
-                                              (p) =>
-                                                p.name ===
-                                                comment.author
-                                            )?.avatar
-                                          }
-                                          alt={
-                                            comment.author
-                                          }
-                                        />
-                                        <AvatarFallback>
-                                          {comment.author
-                                            .split(" ")
-                                            .map(
-                                              (n) => n[0]
-                                            )
-                                            .join("")}
-                                        </AvatarFallback>
-                                      </Avatar>
-                                      <div className="flex-1">
-                                        <p className="text-sm font-medium">
-                                          {
-                                            comment.author.split(
-                                              " "
-                                            )[0]
-                                          }
-                                        </p>
-                                        <p className="text-sm text-muted-foreground">
-                                          {comment.text}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  )
-                                )}
+                                      <AvatarImage
+                                        src={
+                                          people.find(
+                                            (p) => p.name === contributor
+                                          )?.avatar
+                                        }
+                                        alt={contributor}
+                                      />
+                                      <AvatarFallback>
+                                        {contributor
+                                          .split(" ")
+                                          .map((n) => n[0])
+                                          .join("")}
+                                      </AvatarFallback>
+                                    </Avatar>
+                                  ))}
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8 shrink-0"
+                                  onClick={() => toggleMovie(movie.title)}
+                                >
+                                  {isExpanded ? (
+                                    <ChevronUp className="h-4 w-4" />
+                                  ) : (
+                                    <ChevronDown className="h-4 w-4" />
+                                  )}
+                                </Button>
                               </div>
                             </div>
-                          )}
+                            <p className="mt-2 text-sm text-muted-foreground">
+                              {movie.description}
+                            </p>
+                          </div>
                         </div>
+
+                        {isExpanded && (
+                          <div className="border-t bg-muted/50 px-4 py-3">
+                            <h4 className="mb-2 text-sm font-medium">
+                              Comments
+                            </h4>
+                            <div className="space-y-3">
+                              {movie.comments.map((comment, index) => (
+                                <div
+                                  key={index}
+                                  className="flex items-start gap-2"
+                                >
+                                  <Avatar className="h-6 w-6">
+                                    <AvatarImage
+                                      src={
+                                        people.find(
+                                          (p) => p.name === comment.author
+                                        )?.avatar
+                                      }
+                                      alt={comment.author}
+                                    />
+                                    <AvatarFallback>
+                                      {comment.author
+                                        .split(" ")
+                                        .map((n) => n[0])
+                                        .join("")}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div className="flex-1">
+                                    <p className="text-sm font-medium">
+                                      {comment.author.split(" ")[0]}
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">
+                                      {comment.text}
+                                    </p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    );
-                  })}
-                </div>
-              )
-            )}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </section>
       </div>
