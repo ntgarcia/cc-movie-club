@@ -53,25 +53,22 @@ export default function Page() {
   const [error, setError] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        setError(null);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-        // Fetch people
-        const { data: peopleData, error: peopleError } =
-          await supabase.from("people").select("*");
+      const { data: peopleData, error: peopleError } =
+        await supabase.from("people").select("*");
 
-        if (peopleError) throw peopleError;
-        setPeople(peopleData);
+      if (peopleError) throw peopleError;
+      setPeople(peopleData);
 
-        // Fetch movies with related data
-        const { data: moviesData, error: moviesError } =
-          await supabase
-            .from("movies")
-            .select(
-              `
+      const { data: moviesData, error: moviesError } =
+        await supabase
+          .from("movies")
+          .select(
+            `
             *,
             picker:picker_id(id, name, avatar_url),
             movie_contributors:movie_contributors(
@@ -82,40 +79,48 @@ export default function Page() {
               author:people(*)
             )
           `
-            )
-            .order("date", { ascending: false });
+          )
+          .order("date", { ascending: false });
 
-        if (moviesError) throw moviesError;
+      if (moviesError) throw moviesError;
 
-        // Transform the data to match your component's expectations
-        const transformedMovies = moviesData.map(
-          (movie) => ({
-            ...movie,
-            contributors: movie.movie_contributors.map(
-              (mc: { contributor: Person }) =>
-                mc.contributor
-            ),
-            comments: movie.comments.map(
-              (comment: { author: Person }) => ({
-                ...comment,
-                author: comment.author,
-              })
-            ),
-          })
-        );
-
-        setMovies(transformedMovies);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setError(
-          "Failed to load data. Please try again later."
-        );
-      } finally {
-        setLoading(false);
-      }
+      setMovies(
+        moviesData.map((movie) => ({
+          ...movie,
+          contributors: movie.movie_contributors.map(
+            (mc: { contributor: Person }) => mc.contributor
+          ),
+          comments: movie.comments.map(
+            (comment: { author: Person }) => ({
+              ...comment,
+              author: comment.author,
+            })
+          ),
+        }))
+      );
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(
+        "Failed to load data. Please try again later."
+      );
+    } finally {
+      setLoading(false);
     }
+  };
 
+  useEffect(() => {
     fetchData();
+
+    // Subscribe to auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_IN") {
+        fetchData();
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
