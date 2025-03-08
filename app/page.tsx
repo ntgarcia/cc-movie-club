@@ -231,7 +231,7 @@ export default function Page() {
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <Avatar className="h-8 w-8 mb-4">
-                <AvatarImage src="/cc.png" />
+                <AvatarImage src="https://uploadthing.com/f/Ak9BmqoGNVp3tLeQjbU3oOYrDFX1UfTwu0kMRSg7hIctHxsy" />
                 <AvatarFallback>CC</AvatarFallback>
               </Avatar>
               <h1 className="mb-4 text-base font-bold ml-2">
