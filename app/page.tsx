@@ -1,6 +1,10 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
 // import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -24,6 +28,11 @@ const people = [
     name: "Johann Ebrole",
     avatar:
       "https://uploadthing.com/f/Ak9BmqoGNVp39PuAqP5Uv7q3iLSH4VQ0eT6c8PhEFKJkdXoj",
+  },
+  {
+    name: "Jenelle Nievas",
+    avatar:
+      "https://uploadthing.com/f/Ak9BmqoGNVp3GahKPOBPle78t4bXYowux0CUJhW62zK13cDN",
   },
   {
     name: "Nigel Tomas",
@@ -54,13 +63,24 @@ const people = [
 
 const movies = [
   {
+    title: "Aftersun",
+    date: "March 2025",
+    description:
+      "Twenty years after their last holiday at a fading vacation resort, Sophie reflects on the rare time spent with her loving and idealistic father Calum. Sophie's recollections become a powerful and heartrending portrait of their relationship, as she tries to reconcile the father she knew with the man she didn't.",
+    image:
+      "https://uploadthing.com/f/Ak9BmqoGNVp3evbscdgHTaQEtXF4lZMJyqh5gvmweSA0x92p",
+    picker: ["Jillian Muli", "Jenelle Nievas"],
+    contributors: ["Cream Cheese"],
+    comments: [],
+  },
+  {
     title: "Conclave",
     date: "February 2025",
     description:
       "After the unexpected death of the Pope, Cardinal Lawrence is tasked with managing the covert and ancient ritual of electing a new one. Sequestered in the Vatican with the Catholic Church's most powerful leaders until the process is complete, Lawrence finds himself at the center of a conspiracy that could lead to its downfall.",
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3yO0zwufzAZ0paJewfhRiFGUvV1m6jIQux8Yl",
-    picker: "Nathan",
+    picker: ["Cream Cheese"],
     contributors: ["Cream Cheese"],
     comments: [
       {
@@ -80,8 +100,12 @@ const movies = [
       "After horrific riding accident leaves him unable to compete in the rodeo circuit, a young cowboy is forced to look for a new purpose.",
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3tbWEMRSU3oOYrDFX1UfTwu0kMRSg7hIctHxs",
-    picker: "Nathan",
-    contributors: ["Nigel Tomas", "Jillian Muli", "Jared Madayag"],
+    picker: ["Nathan"],
+    contributors: [
+      "Nigel Tomas",
+      "Jillian Muli",
+      "Jared Madayag",
+    ],
     comments: [
       {
         author: "Nigel Tomas",
@@ -104,7 +128,7 @@ const movies = [
       "A young woman finds herself at a renowned mental institution for troubled young women, where she must choose between the world of people who belong on the inside or the often difficult world of reality on the outside.",
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3IvZJ0IdACwPMiSZ0RjgsOu24fL9ohN5FUeqT",
-    picker: "Tisha Halim",
+    picker: ["Tisha Halim"],
     contributors: ["Cream Cheese"],
     comments: [
       {
@@ -120,7 +144,7 @@ const movies = [
       "Escaping postwar Europe, a visionary architect comes to America to rebuild his life, his career, and his marriage. On his own in a strange new country, he settles in Pennsylvania, where a wealthy and prominent industrialist recognises his talent.",
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3JJnMatEgM3Ccear2d6zmt5nsXZGLQ1FvwfR7",
-    picker: "Nathan",
+    picker: ["Nathan"],
     contributors: [
       "Nigel Tomas",
       "Nathan Garcia",
@@ -141,8 +165,12 @@ const movies = [
       "When a ronin requesting seppuku at a feudal lord's palace is told of the brutal suicide of another ronin who previously visited, he reveals how their pasts are intertwined - and in doing so challenges the clan's integrity.",
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3XQQl1USOcWgpi2klhJ1dxA7n4S6COK5PfuQM",
-    picker: "Nigel",
-    contributors: ["Nigel Tomas", "Nathan Garcia", "Johann Ebrole"],
+    picker: ["Nigel"],
+    contributors: [
+      "Nigel Tomas",
+      "Nathan Garcia",
+      "Johann Ebrole",
+    ],
     comments: [
       {
         author: "Nigel Tomas",
@@ -165,7 +193,7 @@ const movies = [
       "In the 1830s, estate agent Thomas Hutter travels to Transylvania for a fateful meeting with Count Orlok, a prospective client. In his absence, Hutter's new bride, Ellen, is left under the care of their friends, Friedrich and Anna Harding. Plagued by horrific visions and an increasing sense of dread, Ellen soon encounters an evil force that's far beyond her control.",
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3v48S24tzbwAWCf6UD3RtN4iMxo9E8OaeJK5g",
-    picker: "Nathan",
+    picker: ["Nathan"],
     contributors: [
       "Nathan Garcia",
       "Johann Ebrole",
@@ -191,11 +219,15 @@ const movies = [
 ];
 
 export default function Page() {
-  const [expandedMovies, setExpandedMovies] = useState<string[]>([]);
+  const [expandedMovies, setExpandedMovies] = useState<
+    string[]
+  >([]);
 
   const toggleMovie = (title: string) => {
     setExpandedMovies((prev) =>
-      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
+      prev.includes(title)
+        ? prev.filter((t) => t !== title)
+        : [...prev, title]
     );
   };
 
@@ -234,7 +266,8 @@ export default function Page() {
             </div>
           </div>
           <p className="leading-relaxed">
-            Journaling our group movie watches & our thoughts!
+            Journaling our group movie watches & our
+            thoughts!
           </p>
         </header>
 
@@ -244,9 +277,15 @@ export default function Page() {
           </h2>
           <div className="flex flex-wrap -space-x-2 sm:-space-x-0 sm:gap-4">
             {people.map((person) => (
-              <div key={person.name} className="flex items-center">
+              <div
+                key={person.name}
+                className="flex items-center"
+              >
                 <Avatar className="h-8 w-8 border-2 border-background sm:mr-2">
-                  <AvatarImage src={person.avatar} alt={person.name} />
+                  <AvatarImage
+                    src={person.avatar}
+                    alt={person.name}
+                  />
                   <AvatarFallback>
                     {person.name
                       .split(" ")
@@ -254,7 +293,9 @@ export default function Page() {
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-sm hidden sm:flex">{person.name}</span>
+                <span className="text-sm hidden sm:flex">
+                  {person.name}
+                </span>
               </div>
             ))}
           </div>
@@ -267,128 +308,160 @@ export default function Page() {
           <div className="relative space-y-4 pl-4">
             <div className="absolute left-0 top-0 h-full w-px bg-border" />
 
-            {Object.entries(groupedMovies).map(([month, movies]) => (
-              <div key={month}>
-                <h3 className="text-sm font-medium mb-4">{month}</h3>
-                {movies.map((movie) => {
-                  const isExpanded = expandedMovies.includes(movie.title);
+            {Object.entries(groupedMovies).map(
+              ([month, movies]) => (
+                <div key={month}>
+                  <h3 className="text-sm font-medium mb-4">
+                    {month}
+                  </h3>
+                  {movies.map((movie) => {
+                    const isExpanded =
+                      expandedMovies.includes(movie.title);
 
-                  return (
-                    <div key={movie.title} className="group relative">
-                      <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
+                    return (
+                      <div
+                        key={movie.title}
+                        className="group relative"
+                      >
+                        <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
 
-                      <div className="rounded-lg border transition-colors hover:bg-muted/50 mb-2">
-                        <div className="p-4 flex flex-col sm:flex-row gap-4">
-                          <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
-                            <Image
-                              src={movie.image}
-                              alt={movie.title}
-                              fill
-                              unoptimized
-                              className="rounded-md object-cover"
-                            />
-                          </div>
+                        <div className="rounded-lg border transition-colors hover:bg-muted/50 mb-2">
+                          <div className="p-4 flex flex-col sm:flex-row gap-4">
+                            <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
+                              <Image
+                                src={movie.image}
+                                alt={movie.title}
+                                fill
+                                unoptimized
+                                className="rounded-md object-cover"
+                              />
+                            </div>
 
-                          <div className="flex-1 min-w-0">
-                            <div className="flex justify-between">
-                              <div className="flex flex-row items-center gap-2">
-                                <h3 className="font-medium leading-none">
-                                  {movie.title}
-                                </h3>
-                                {/* <p className="hidden sm:flex mt-1 text-sm text-muted-foreground">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex justify-between">
+                                <div className="flex flex-row items-center gap-2">
+                                  <h3 className="font-medium leading-none">
+                                    {movie.title}
+                                  </h3>
+                                  {/* <p className="hidden sm:flex mt-1 text-sm text-muted-foreground">
                                   {movie.date}
                                 </p> */}
-                              </div>
-                              <div className="flex flex-row items-center gap-2">
-                                <div className="flex -space-x-2 shrink-0">
-                                  {movie.contributors.map((contributor) => (
-                                    <Avatar
-                                      key={contributor}
-                                      className="h-6 w-6 border-2 border-background"
-                                    >
-                                      <AvatarImage
-                                        src={
-                                          people.find(
-                                            (p) => p.name === contributor
-                                          )?.avatar
-                                        }
-                                        alt={contributor}
-                                      />
-                                      <AvatarFallback>
-                                        {contributor
-                                          .split(" ")
-                                          .map((n) => n[0])
-                                          .join("")}
-                                      </AvatarFallback>
-                                    </Avatar>
-                                  ))}
                                 </div>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  className="h-8 w-8 shrink-0"
-                                  onClick={() => toggleMovie(movie.title)}
-                                >
-                                  {isExpanded ? (
-                                    <ChevronUp className="h-4 w-4" />
-                                  ) : (
-                                    <ChevronDown className="h-4 w-4" />
-                                  )}
-                                </Button>
-                              </div>
-                            </div>
-                            <p className="mt-2 text-sm text-muted-foreground">
-                              {movie.description}
-                            </p>
-                          </div>
-                        </div>
-
-                        {isExpanded && (
-                          <div className="border-t bg-muted/50 px-4 py-3">
-                            <h4 className="mb-2 text-sm font-medium">
-                              Comments
-                            </h4>
-                            <div className="space-y-3">
-                              {movie.comments.map((comment, index) => (
-                                <div
-                                  key={index}
-                                  className="flex items-start gap-2"
-                                >
-                                  <Avatar className="h-6 w-6">
-                                    <AvatarImage
-                                      src={
-                                        people.find(
-                                          (p) => p.name === comment.author
-                                        )?.avatar
-                                      }
-                                      alt={comment.author}
-                                    />
-                                    <AvatarFallback>
-                                      {comment.author
-                                        .split(" ")
-                                        .map((n) => n[0])
-                                        .join("")}
-                                    </AvatarFallback>
-                                  </Avatar>
-                                  <div className="flex-1">
-                                    <p className="text-sm font-medium">
-                                      {comment.author.split(" ")[0]}
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                      {comment.text}
-                                    </p>
+                                <div className="flex flex-row items-center gap-2">
+                                  <div className="flex -space-x-2 shrink-0">
+                                    {movie.contributors.map(
+                                      (contributor) => (
+                                        <Avatar
+                                          key={contributor}
+                                          className="h-6 w-6 border-2 border-background"
+                                        >
+                                          <AvatarImage
+                                            src={
+                                              people.find(
+                                                (p) =>
+                                                  p.name ===
+                                                  contributor
+                                              )?.avatar
+                                            }
+                                            alt={
+                                              contributor
+                                            }
+                                          />
+                                          <AvatarFallback>
+                                            {contributor
+                                              .split(" ")
+                                              .map(
+                                                (n) => n[0]
+                                              )
+                                              .join("")}
+                                          </AvatarFallback>
+                                        </Avatar>
+                                      )
+                                    )}
                                   </div>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-8 w-8 shrink-0"
+                                    onClick={() =>
+                                      toggleMovie(
+                                        movie.title
+                                      )
+                                    }
+                                  >
+                                    {isExpanded ? (
+                                      <ChevronUp className="h-4 w-4" />
+                                    ) : (
+                                      <ChevronDown className="h-4 w-4" />
+                                    )}
+                                  </Button>
                                 </div>
-                              ))}
+                              </div>
+                              <p className="mt-2 text-sm text-muted-foreground">
+                                {movie.description}
+                              </p>
                             </div>
                           </div>
-                        )}
+
+                          {isExpanded && (
+                            <div className="border-t bg-muted/50 px-4 py-3">
+                              <h4 className="mb-2 text-sm font-medium">
+                                Comments
+                              </h4>
+                              <div className="space-y-3">
+                                {movie.comments.map(
+                                  (comment, index) => (
+                                    <div
+                                      key={index}
+                                      className="flex items-start gap-2"
+                                    >
+                                      <Avatar className="h-6 w-6">
+                                        <AvatarImage
+                                          src={
+                                            people.find(
+                                              (p) =>
+                                                p.name ===
+                                                comment.author
+                                            )?.avatar
+                                          }
+                                          alt={
+                                            comment.author
+                                          }
+                                        />
+                                        <AvatarFallback>
+                                          {comment.author
+                                            .split(" ")
+                                            .map(
+                                              (n) => n[0]
+                                            )
+                                            .join("")}
+                                        </AvatarFallback>
+                                      </Avatar>
+                                      <div className="flex-1">
+                                        <p className="text-sm font-medium">
+                                          {
+                                            comment.author.split(
+                                              " "
+                                            )[0]
+                                          }
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
+                                          {comment.text}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
+                    );
+                  })}
+                </div>
+              )
+            )}
           </div>
         </section>
       </div>

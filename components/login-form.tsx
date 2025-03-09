@@ -17,7 +17,10 @@ export function LoginForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+    >
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
@@ -47,9 +50,17 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                />
               </div>
-              <Button type="submit" className="w-full" formAction={login}>
+              <Button
+                type="submit"
+                className="w-full"
+                formAction={login}
+              >
                 Login
               </Button>
               {/* <Button variant="outline" className="w-full">
@@ -59,7 +70,7 @@ export function LoginForm({
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
               <Button
-                href="#"
+                // href="#"
                 className="underline underline-offset-4"
                 formAction={signup}
                 variant="ghost"
