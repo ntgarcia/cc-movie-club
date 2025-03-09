@@ -257,12 +257,12 @@ export default function Page() {
             </div>
             <div className="mb-4 flex gap-4">
               <ThemeToggle />
-              <div className="col-6 form-widget">
+              {/* <div className="col-6 form-widget">
                 <Button>
                   {" "}
                   <Link href="/login">Login</Link>
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
           <p className="leading-relaxed">
@@ -303,7 +303,7 @@ export default function Page() {
 
         <section className="space-y-4">
           <h2 className="text-sm font-medium tracking-wider text-muted-foreground">
-            2025
+            Movies (2025)
           </h2>
           <div className="relative space-y-4 pl-4">
             <div className="absolute left-0 top-0 h-full w-px bg-border" />
