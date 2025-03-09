@@ -65,6 +65,7 @@ const movies = [
   {
     title: "Aftersun",
     date: "March 2025",
+    theme: { name: "Irish", color: "green" },
     description:
       "Twenty years after their last holiday at a fading vacation resort, Sophie reflects on the rare time spent with her loving and idealistic father Calum. Sophie's recollections become a powerful and heartrending portrait of their relationship, as she tries to reconcile the father she knew with the man she didn't.",
     image:
@@ -96,6 +97,7 @@ const movies = [
   {
     title: "The Rider",
     date: "February 2025",
+    theme: { name: "Horse", color: "brown" },
     description:
       "After horrific riding accident leaves him unable to compete in the rodeo circuit, a young cowboy is forced to look for a new purpose.",
     image:
@@ -161,6 +163,7 @@ const movies = [
   {
     title: "Harakiri",
     date: "January 2025",
+    theme: { name: "No theme", color: "grey" },
     description:
       "When a ronin requesting seppuku at a feudal lord's palace is told of the brutal suicide of another ronin who previously visited, he reveals how their pasts are intertwined - and in doing so challenges the clan's integrity.",
     image:
@@ -325,15 +328,71 @@ export default function Page() {
                       >
                         <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
 
-                        <div className="rounded-lg border transition-colors hover:bg-muted/50 mb-2">
-                          <div className="p-4 flex flex-col sm:flex-row gap-4">
+                        <div
+                          className={`rounded-lg border transition-all duration-200 ease-in-out mb-2 relative overflow-hidden ${
+                            movie.theme
+                              ? `border ${
+                                  movie.theme.color ===
+                                  "green"
+                                    ? "border-green-500/20 dark:border-green-500/10 hover:border-green-500/30 dark:hover:border-green-500/20"
+                                    : movie.theme.color ===
+                                      "purple"
+                                    ? "border-purple-500/20 dark:border-purple-500/10 hover:border-purple-500/30 dark:hover:border-purple-500/20"
+                                    : movie.theme.color ===
+                                      "brown"
+                                    ? "border-amber-500/20 dark:border-amber-500/10 hover:border-amber-500/30 dark:hover:border-amber-500/20"
+                                    : "border-gray-500/20 dark:border-gray-500/10 hover:border-gray-500/30 dark:hover:border-gray-500/20"
+                                } dark:before:absolute dark:before:inset-0 dark:before:bg-gradient-to-r dark:before:from-transparent dark:before:transition-all dark:before:duration-200 ${
+                                  movie.theme.color ===
+                                  "green"
+                                    ? "dark:before:via-green-500/5 dark:hover:before:via-green-500/10"
+                                    : movie.theme.color ===
+                                      "purple"
+                                    ? "dark:before:via-purple-500/5 dark:hover:before:via-purple-500/10"
+                                    : movie.theme.color ===
+                                      "brown"
+                                    ? "dark:before:via-amber-500/5 dark:hover:before:via-amber-500/10"
+                                    : "dark:before:via-gray-500/5 dark:hover:before:via-gray-500/10"
+                                } dark:before:to-transparent dark:before:animate-shine dark:before:bg-[length:200%_100%] dark:after:absolute dark:after:inset-0 dark:after:bg-gradient-to-b dark:after:transition-all dark:after:duration-200 ${
+                                  movie.theme.color ===
+                                  "green"
+                                    ? "dark:after:from-green-900/5 dark:hover:after:from-green-900/10"
+                                    : movie.theme.color ===
+                                      "purple"
+                                    ? "dark:after:from-purple-900/5 dark:hover:after:from-purple-900/10"
+                                    : movie.theme.color ===
+                                      "brown"
+                                    ? "dark:after:from-amber-900/5 dark:hover:after:from-amber-900/10"
+                                    : "dark:after:from-gray-900/5 dark:hover:after:from-gray-900/10"
+                                } dark:after:to-transparent/5 dark:after:backdrop-blur-[1px] hover:bg-muted/10 dark:bg-muted/20 dark:hover:bg-background/50`
+                              : "hover:bg-muted/20 dark:hover:bg-muted/30"
+                          }`}
+                        >
+                          <div className="relative z-10 p-4 flex flex-col sm:flex-row gap-4">
                             <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
+                              <div
+                                className={`absolute inset-0 -m-1 rounded-md blur-md ${
+                                  movie.theme
+                                    ? movie.theme.color ===
+                                      "green"
+                                      ? "bg-green-500/10"
+                                      : movie.theme
+                                          .color ===
+                                        "purple"
+                                      ? "bg-purple-500/10"
+                                      : movie.theme
+                                          .color === "brown"
+                                      ? "bg-amber-500/10"
+                                      : "bg-gray-500/10"
+                                    : "bg-primary/10"
+                                }`}
+                              ></div>
                               <Image
                                 src={movie.image}
                                 alt={movie.title}
                                 fill
                                 unoptimized
-                                className="rounded-md object-cover"
+                                className="rounded-md object-cover relative"
                               />
                             </div>
 
@@ -343,9 +402,32 @@ export default function Page() {
                                   <h3 className="font-medium leading-none">
                                     {movie.title}
                                   </h3>
-                                  {/* <p className="hidden sm:flex mt-1 text-sm text-muted-foreground">
-                                  {movie.date}
-                                </p> */}
+                                  {movie.theme && (
+                                    <span
+                                      className={`px-2 py-0.5 text-xs font-medium rounded-full
+                                        ${
+                                          movie.theme
+                                            .color ===
+                                          "green"
+                                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                                            : movie.theme
+                                                .color ===
+                                              "purple"
+                                            ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+                                            : movie.theme
+                                                .color ===
+                                              "brown"
+                                            ? "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300"
+                                            : movie.theme
+                                                .color ===
+                                              "grey"
+                                            ? "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                                            : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                                        }`}
+                                    >
+                                      {movie.theme.name}
+                                    </span>
+                                  )}
                                 </div>
                                 <div className="flex flex-row items-center gap-2">
                                   <div className="flex -space-x-2 shrink-0">
