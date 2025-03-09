@@ -70,7 +70,7 @@ const movies = [
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3evbscdgHTaQEtXF4lZMJyqh5gvmweSA0x92p",
     picker: ["Jillian Muli", "Jenelle Nievas"],
-    contributors: ["Cream Cheese"],
+    contributors: [],
     comments: [],
   },
   {
@@ -303,7 +303,7 @@ export default function Page() {
 
         <section className="space-y-4">
           <h2 className="text-sm font-medium tracking-wider text-muted-foreground">
-            Movies
+            2025
           </h2>
           <div className="relative space-y-4 pl-4">
             <div className="absolute left-0 top-0 h-full w-px bg-border" />
