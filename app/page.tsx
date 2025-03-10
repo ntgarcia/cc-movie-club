@@ -364,14 +364,14 @@ export default function Page() {
                                       "brown"
                                     ? "dark:after:from-amber-900/5 dark:hover:after:from-amber-900/10"
                                     : "dark:after:from-gray-900/5 dark:hover:after:from-gray-900/10"
-                                } dark:after:to-transparent/5 dark:after:backdrop-blur-[1px] hover:bg-muted/10 dark:bg-muted/20 dark:hover:bg-background/50`
+                                } dark:after:to-transparent/5 hover:bg-muted/10 dark:bg-muted/20 dark:hover:bg-background/50`
                               : "hover:bg-muted/20 dark:hover:bg-muted/30"
                           }`}
                         >
                           <div className="relative z-10 p-4 flex flex-col sm:flex-row gap-4">
                             <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
                               <div
-                                className={`absolute inset-0 -m-1 rounded-md blur-md ${
+                                className={`absolute inset-0 -m-1 rounded-md ${
                                   movie.theme
                                     ? movie.theme.color ===
                                       "green"
