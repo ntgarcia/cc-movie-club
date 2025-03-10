@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -59,6 +55,10 @@ const people = [
     avatar:
       "https://uploadthing.com/f/Ak9BmqoGNVp3ZUQXiBLMedVhpwHtXAGofK7gNWiuxvnBQ8yb",
   },
+  {
+    name: "Peyton Wong",
+    avatar: "",
+  },
 ];
 
 const movies = [
@@ -71,7 +71,7 @@ const movies = [
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3evbscdgHTaQEtXF4lZMJyqh5gvmweSA0x92p",
     picker: ["Jillian Muli", "Jenelle Nievas"],
-    contributors: [],
+    contributors: ["Nathan Garcia", "Peyton Wong"],
     comments: [],
   },
   {
@@ -103,11 +103,7 @@ const movies = [
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3tbWEMRSU3oOYrDFX1UfTwu0kMRSg7hIctHxs",
     picker: ["Nathan"],
-    contributors: [
-      "Nigel Tomas",
-      "Jillian Muli",
-      "Jared Madayag",
-    ],
+    contributors: ["Nigel Tomas", "Jillian Muli", "Jared Madayag"],
     comments: [
       {
         author: "Nigel Tomas",
@@ -169,11 +165,7 @@ const movies = [
     image:
       "https://uploadthing.com/f/Ak9BmqoGNVp3XQQl1USOcWgpi2klhJ1dxA7n4S6COK5PfuQM",
     picker: ["Nigel"],
-    contributors: [
-      "Nigel Tomas",
-      "Nathan Garcia",
-      "Johann Ebrole",
-    ],
+    contributors: ["Nigel Tomas", "Nathan Garcia", "Johann Ebrole"],
     comments: [
       {
         author: "Nigel Tomas",
@@ -222,15 +214,11 @@ const movies = [
 ];
 
 export default function Page() {
-  const [expandedMovies, setExpandedMovies] = useState<
-    string[]
-  >([]);
+  const [expandedMovies, setExpandedMovies] = useState<string[]>([]);
 
   const toggleMovie = (title: string) => {
     setExpandedMovies((prev) =>
-      prev.includes(title)
-        ? prev.filter((t) => t !== title)
-        : [...prev, title]
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
     );
   };
 
@@ -269,8 +257,7 @@ export default function Page() {
             </div>
           </div>
           <p className="leading-relaxed">
-            Journaling our group movie watches & our
-            thoughts!
+            Journaling our group movie watches & our thoughts!
           </p>
         </header>
 
@@ -280,15 +267,9 @@ export default function Page() {
           </h2>
           <div className="flex flex-wrap -space-x-2 sm:-space-x-0 sm:gap-4">
             {people.map((person) => (
-              <div
-                key={person.name}
-                className="flex items-center"
-              >
+              <div key={person.name} className="flex items-center">
                 <Avatar className="h-8 w-8 border-2 border-background sm:mr-2">
-                  <AvatarImage
-                    src={person.avatar}
-                    alt={person.name}
-                  />
+                  <AvatarImage src={person.avatar} alt={person.name} />
                   <AvatarFallback>
                     {person.name
                       .split(" ")
@@ -296,9 +277,7 @@ export default function Page() {
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-sm hidden sm:flex">
-                  {person.name}
-                </span>
+                <span className="text-sm hidden sm:flex">{person.name}</span>
               </div>
             ))}
           </div>
@@ -311,239 +290,186 @@ export default function Page() {
           <div className="relative space-y-4 pl-4">
             <div className="absolute left-0 top-0 h-full w-px bg-border" />
 
-            {Object.entries(groupedMovies).map(
-              ([month, movies]) => (
-                <div key={month}>
-                  <h3 className="text-sm font-medium mb-4">
-                    {month}
-                  </h3>
-                  {movies.map((movie) => {
-                    const isExpanded =
-                      expandedMovies.includes(movie.title);
+            {Object.entries(groupedMovies).map(([month, movies]) => (
+              <div key={month}>
+                <h3 className="text-sm font-medium mb-4">{month}</h3>
+                {movies.map((movie) => {
+                  const isExpanded = expandedMovies.includes(movie.title);
 
-                    return (
+                  return (
+                    <div key={movie.title} className="group relative">
+                      <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
+
                       <div
-                        key={movie.title}
-                        className="group relative"
+                        className={`rounded-lg border transition-all duration-200 ease-in-out mb-2 relative overflow-hidden ${
+                          movie.theme
+                            ? `border ${
+                                movie.theme.color === "green"
+                                  ? "border-green-500/20 dark:border-green-500/10 hover:border-green-500/30 dark:hover:border-green-500/20"
+                                  : movie.theme.color === "purple"
+                                  ? "border-purple-500/20 dark:border-purple-500/10 hover:border-purple-500/30 dark:hover:border-purple-500/20"
+                                  : movie.theme.color === "brown"
+                                  ? "border-amber-500/20 dark:border-amber-500/10 hover:border-amber-500/30 dark:hover:border-amber-500/20"
+                                  : "border-gray-500/20 dark:border-gray-500/10 hover:border-gray-500/30 dark:hover:border-gray-500/20"
+                              } dark:before:absolute dark:before:inset-0 dark:before:bg-gradient-to-r dark:before:from-transparent dark:before:transition-all dark:before:duration-200 ${
+                                movie.theme.color === "green"
+                                  ? "dark:before:via-green-500/5 dark:hover:before:via-green-500/10"
+                                  : movie.theme.color === "purple"
+                                  ? "dark:before:via-purple-500/5 dark:hover:before:via-purple-500/10"
+                                  : movie.theme.color === "brown"
+                                  ? "dark:before:via-amber-500/5 dark:hover:before:via-amber-500/10"
+                                  : "dark:before:via-gray-500/5 dark:hover:before:via-gray-500/10"
+                              } dark:before:to-transparent dark:before:animate-shine dark:before:bg-[length:200%_100%] dark:after:absolute dark:after:inset-0 dark:after:bg-gradient-to-b dark:after:transition-all dark:after:duration-200 ${
+                                movie.theme.color === "green"
+                                  ? "dark:after:from-green-900/5 dark:hover:after:from-green-900/10"
+                                  : movie.theme.color === "purple"
+                                  ? "dark:after:from-purple-900/5 dark:hover:after:from-purple-900/10"
+                                  : movie.theme.color === "brown"
+                                  ? "dark:after:from-amber-900/5 dark:hover:after:from-amber-900/10"
+                                  : "dark:after:from-gray-900/5 dark:hover:after:from-gray-900/10"
+                              } dark:after:to-transparent/5 hover:bg-muted/10 dark:bg-muted/20 dark:hover:bg-background/50`
+                            : "hover:bg-muted/20 dark:hover:bg-muted/30"
+                        }`}
                       >
-                        <div className="absolute -left-[1.3rem] top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 border-background bg-border group-hover:bg-primary" />
+                        <div className="relative z-10 p-4 flex flex-col sm:flex-row gap-4">
+                          <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
+                            <div
+                              className={`absolute inset-0 -m-1 rounded-md ${
+                                movie.theme
+                                  ? movie.theme.color === "green"
+                                    ? "bg-green-500/10"
+                                    : movie.theme.color === "purple"
+                                    ? "bg-purple-500/10"
+                                    : movie.theme.color === "brown"
+                                    ? "bg-amber-500/10"
+                                    : "bg-gray-500/10"
+                                  : "bg-primary/10"
+                              }`}
+                            ></div>
+                            <Image
+                              src={movie.image}
+                              alt={movie.title}
+                              fill
+                              unoptimized
+                              className="rounded-sm object-cover relative"
+                            />
+                          </div>
 
-                        <div
-                          className={`rounded-lg border transition-all duration-200 ease-in-out mb-2 relative overflow-hidden ${
-                            movie.theme
-                              ? `border ${
-                                  movie.theme.color ===
-                                  "green"
-                                    ? "border-green-500/20 dark:border-green-500/10 hover:border-green-500/30 dark:hover:border-green-500/20"
-                                    : movie.theme.color ===
-                                      "purple"
-                                    ? "border-purple-500/20 dark:border-purple-500/10 hover:border-purple-500/30 dark:hover:border-purple-500/20"
-                                    : movie.theme.color ===
-                                      "brown"
-                                    ? "border-amber-500/20 dark:border-amber-500/10 hover:border-amber-500/30 dark:hover:border-amber-500/20"
-                                    : "border-gray-500/20 dark:border-gray-500/10 hover:border-gray-500/30 dark:hover:border-gray-500/20"
-                                } dark:before:absolute dark:before:inset-0 dark:before:bg-gradient-to-r dark:before:from-transparent dark:before:transition-all dark:before:duration-200 ${
-                                  movie.theme.color ===
-                                  "green"
-                                    ? "dark:before:via-green-500/5 dark:hover:before:via-green-500/10"
-                                    : movie.theme.color ===
-                                      "purple"
-                                    ? "dark:before:via-purple-500/5 dark:hover:before:via-purple-500/10"
-                                    : movie.theme.color ===
-                                      "brown"
-                                    ? "dark:before:via-amber-500/5 dark:hover:before:via-amber-500/10"
-                                    : "dark:before:via-gray-500/5 dark:hover:before:via-gray-500/10"
-                                } dark:before:to-transparent dark:before:animate-shine dark:before:bg-[length:200%_100%] dark:after:absolute dark:after:inset-0 dark:after:bg-gradient-to-b dark:after:transition-all dark:after:duration-200 ${
-                                  movie.theme.color ===
-                                  "green"
-                                    ? "dark:after:from-green-900/5 dark:hover:after:from-green-900/10"
-                                    : movie.theme.color ===
-                                      "purple"
-                                    ? "dark:after:from-purple-900/5 dark:hover:after:from-purple-900/10"
-                                    : movie.theme.color ===
-                                      "brown"
-                                    ? "dark:after:from-amber-900/5 dark:hover:after:from-amber-900/10"
-                                    : "dark:after:from-gray-900/5 dark:hover:after:from-gray-900/10"
-                                } dark:after:to-transparent/5 hover:bg-muted/10 dark:bg-muted/20 dark:hover:bg-background/50`
-                              : "hover:bg-muted/20 dark:hover:bg-muted/30"
-                          }`}
-                        >
-                          <div className="relative z-10 p-4 flex flex-col sm:flex-row gap-4">
-                            <div className="shrink-0 sm:w-20 sm:h-28 w-full h-40 relative">
-                              <div
-                                className={`absolute inset-0 -m-1 rounded-md ${
-                                  movie.theme
-                                    ? movie.theme.color ===
-                                      "green"
-                                      ? "bg-green-500/10"
-                                      : movie.theme
-                                          .color ===
-                                        "purple"
-                                      ? "bg-purple-500/10"
-                                      : movie.theme
-                                          .color === "brown"
-                                      ? "bg-amber-500/10"
-                                      : "bg-gray-500/10"
-                                    : "bg-primary/10"
-                                }`}
-                              ></div>
-                              <Image
-                                src={movie.image}
-                                alt={movie.title}
-                                fill
-                                unoptimized
-                                className="rounded-md object-cover relative"
-                              />
-                            </div>
-
-                            <div className="flex-1 min-w-0">
-                              <div className="flex justify-between">
-                                <div className="flex flex-row items-center gap-2">
-                                  <h3 className="font-medium leading-none">
-                                    {movie.title}
-                                  </h3>
-                                  {movie.theme && (
-                                    <span
-                                      className={`px-2 py-0.5 text-xs font-medium rounded-full
+                          <div className="flex-1 min-w-0">
+                            <div className="flex justify-between">
+                              <div className="flex flex-row items-center gap-2">
+                                <h3 className="font-medium leading-none">
+                                  {movie.title}
+                                </h3>
+                                {movie.theme && (
+                                  <span
+                                    className={`px-2 py-0.5 text-xs font-medium rounded-full
                                         ${
-                                          movie.theme
-                                            .color ===
-                                          "green"
+                                          movie.theme.color === "green"
                                             ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                                            : movie.theme
-                                                .color ===
-                                              "purple"
+                                            : movie.theme.color === "purple"
                                             ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-                                            : movie.theme
-                                                .color ===
-                                              "brown"
+                                            : movie.theme.color === "brown"
                                             ? "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300"
-                                            : movie.theme
-                                                .color ===
-                                              "grey"
+                                            : movie.theme.color === "grey"
                                             ? "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
                                             : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
                                         }`}
-                                    >
-                                      {movie.theme.name}
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="flex flex-row items-center gap-2">
-                                  <div className="flex -space-x-2 shrink-0">
-                                    {movie.contributors.map(
-                                      (contributor) => (
-                                        <Avatar
-                                          key={contributor}
-                                          className="h-6 w-6 border-2 border-background"
-                                        >
-                                          <AvatarImage
-                                            src={
-                                              people.find(
-                                                (p) =>
-                                                  p.name ===
-                                                  contributor
-                                              )?.avatar
-                                            }
-                                            alt={
-                                              contributor
-                                            }
-                                          />
-                                          <AvatarFallback>
-                                            {contributor
-                                              .split(" ")
-                                              .map(
-                                                (n) => n[0]
-                                              )
-                                              .join("")}
-                                          </AvatarFallback>
-                                        </Avatar>
-                                      )
-                                    )}
-                                  </div>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-8 w-8 shrink-0"
-                                    onClick={() =>
-                                      toggleMovie(
-                                        movie.title
-                                      )
-                                    }
                                   >
-                                    {isExpanded ? (
-                                      <ChevronUp className="h-4 w-4" />
-                                    ) : (
-                                      <ChevronDown className="h-4 w-4" />
-                                    )}
-                                  </Button>
-                                </div>
-                              </div>
-                              <p className="mt-2 text-sm text-muted-foreground">
-                                {movie.description}
-                              </p>
-                            </div>
-                          </div>
-
-                          {isExpanded && (
-                            <div className="border-t bg-muted/50 px-4 py-3">
-                              <h4 className="mb-2 text-sm font-medium">
-                                Comments
-                              </h4>
-                              <div className="space-y-3">
-                                {movie.comments.map(
-                                  (comment, index) => (
-                                    <div
-                                      key={index}
-                                      className="flex items-start gap-2"
-                                    >
-                                      <Avatar className="h-6 w-6">
-                                        <AvatarImage
-                                          src={
-                                            people.find(
-                                              (p) =>
-                                                p.name ===
-                                                comment.author
-                                            )?.avatar
-                                          }
-                                          alt={
-                                            comment.author
-                                          }
-                                        />
-                                        <AvatarFallback>
-                                          {comment.author
-                                            .split(" ")
-                                            .map(
-                                              (n) => n[0]
-                                            )
-                                            .join("")}
-                                        </AvatarFallback>
-                                      </Avatar>
-                                      <div className="flex-1">
-                                        <p className="text-sm font-medium">
-                                          {
-                                            comment.author.split(
-                                              " "
-                                            )[0]
-                                          }
-                                        </p>
-                                        <p className="text-sm text-muted-foreground">
-                                          {comment.text}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  )
+                                    {movie.theme.name}
+                                  </span>
                                 )}
                               </div>
+                              <div className="flex flex-row items-center gap-2">
+                                <div className="flex -space-x-2 shrink-0">
+                                  {movie.contributors.map((contributor) => (
+                                    <Avatar
+                                      key={contributor}
+                                      className="h-6 w-6 border-2 border-background"
+                                    >
+                                      <AvatarImage
+                                        src={
+                                          people.find(
+                                            (p) => p.name === contributor
+                                          )?.avatar
+                                        }
+                                        alt={contributor}
+                                      />
+                                      <AvatarFallback>
+                                        {contributor
+                                          .split(" ")
+                                          .map((n) => n[0])
+                                          .join("")}
+                                      </AvatarFallback>
+                                    </Avatar>
+                                  ))}
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8 shrink-0"
+                                  onClick={() => toggleMovie(movie.title)}
+                                >
+                                  {isExpanded ? (
+                                    <ChevronUp className="h-4 w-4" />
+                                  ) : (
+                                    <ChevronDown className="h-4 w-4" />
+                                  )}
+                                </Button>
+                              </div>
                             </div>
-                          )}
+                            <p className="mt-2 text-sm text-muted-foreground">
+                              {movie.description}
+                            </p>
+                          </div>
                         </div>
+
+                        {isExpanded && (
+                          <div className="border-t bg-muted/50 px-4 py-3">
+                            <h4 className="mb-2 text-sm font-medium">
+                              Comments
+                            </h4>
+                            <div className="space-y-3">
+                              {movie.comments.map((comment, index) => (
+                                <div
+                                  key={index}
+                                  className="flex items-start gap-2"
+                                >
+                                  <Avatar className="h-6 w-6">
+                                    <AvatarImage
+                                      src={
+                                        people.find(
+                                          (p) => p.name === comment.author
+                                        )?.avatar
+                                      }
+                                      alt={comment.author}
+                                    />
+                                    <AvatarFallback>
+                                      {comment.author
+                                        .split(" ")
+                                        .map((n) => n[0])
+                                        .join("")}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div className="flex-1">
+                                    <p className="text-sm font-medium">
+                                      {comment.author.split(" ")[0]}
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">
+                                      {comment.text}
+                                    </p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    );
-                  })}
-                </div>
-              )
-            )}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </section>
       </div>
